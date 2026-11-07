@@ -1,0 +1,1459 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Build the Network, Watch It Run",
+    "section": "",
+    "text": "Build the Network, Watch It Run",
+    "crumbs": [
+      "Build the Network, Watch It Run"
+    ]
+  },
+  {
+    "objectID": "index.html#who-this-is-for",
+    "href": "index.html#who-this-is-for",
+    "title": "Build the Network, Watch It Run",
+    "section": "Who this is for",
+    "text": "Who this is for\nThis book is for people learning networking who want to build a topology, configure it with real Linux commands and see what happens. It is also for educators who want to author labs that grade themselves.\nIt assumes you can use a browser and a terminal. It does not assume you have configured a firewall before.",
+    "crumbs": [
+      "Build the Network, Watch It Run"
+    ]
+  },
+  {
+    "objectID": "index.html#what-netsim-is",
+    "href": "index.html#what-netsim-is",
+    "title": "Build the Network, Watch It Run",
+    "section": "What NetSim is",
+    "text": "What NetSim is\nNetSim is a network simulator that runs entirely in the browser. You drag hosts, switches, routers, firewalls and access points onto a canvas, cable them, open a terminal on any device, and use a curated subset of real iproute2, nft, iptables, DHCP, DNS and HTTP commands.\nThere is no backend. Topologies autosave in the browser, export as JSON, and share as compressed URLs.",
+    "crumbs": [
+      "Build the Network, Watch It Run"
+    ]
+  },
+  {
+    "objectID": "index.html#what-it-simulates",
+    "href": "index.html#what-it-simulates",
+    "title": "Build the Network, Watch It Run",
+    "section": "What it simulates",
+    "text": "What it simulates\nL2 switching and VLANs, ARP, IPv4 routing with static and RIP routes, ICMP, a TCP handshake, UDP, DHCP, DNS A records, HTTP, stateful firewalling with NAT, and connection tracking. Every packet is an event you can watch.\nIt does not simulate IPv6, OSPF/BGP, 802.1Q trunking, TLS, real application payloads or performance. It is a teaching and design tool, not a packet-accurate emulator.",
+    "crumbs": [
+      "Build the Network, Watch It Run"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-read-it",
+    "href": "index.html#how-to-read-it",
+    "title": "Build the Network, Watch It Run",
+    "section": "How to read it",
+    "text": "How to read it\nPart 1 teaches the interface, the topology and the commands. Part 2 tests firewalls and services, and explains the bundled labs. Part 3 shows how to author, distribute and export a lab.\nEach chapter ends with an AI exploration, a build or lab task, a summary and a reflection.",
+    "crumbs": [
+      "Build the Network, Watch It Run"
+    ]
+  },
+  {
+    "objectID": "copyright.html",
+    "href": "copyright.html",
+    "title": "Copyright",
+    "section": "",
+    "text": "Build the Network, Watch It Run: A NetSim Field Guide\n© 2026 Michael Borck.\nBook text is licensed under Creative Commons Attribution 4.0 International. NetSim is MIT licensed.",
+    "crumbs": [
+      "Copyright"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html",
+    "href": "chapters/01-network-in-browser.html",
+    "title": "1  A Network in the Browser",
+    "section": "",
+    "text": "1.1 The Concept First\nNetSim runs entirely in the browser. It has no backend, no containers and no real kernels. It is a discrete-event simulator: devices, links and packets are objects in TypeScript, and every packet is an event on a clock.\nThat design gives three things a real network cannot:\nThe trade-off is scope. NetSim simulates a curated subset of IPv4 networking: L2 switching, ARP, static and RIP routing, ICMP, TCP handshakes, UDP, DHCP, DNS, HTTP, stateful firewalls and NAT. It does not simulate IPv6, OSPF/BGP, TLS, real payloads or performance.\nIt is a teaching and design tool. It is not a packet-accurate emulator.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html#the-concept-first",
+    "href": "chapters/01-network-in-browser.html#the-concept-first",
+    "title": "1  A Network in the Browser",
+    "section": "",
+    "text": "Determinism: the same topology and the same actions produce the same result.\nInspectability: every packet can be paused, stepped and explained.\nPortability: it runs on a locked-down laptop or a Chromebook with no install.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html#understanding-through-a-flight-simulator",
+    "href": "chapters/01-network-in-browser.html#understanding-through-a-flight-simulator",
+    "title": "1  A Network in the Browser",
+    "section": "1.2 Understanding Through a Flight Simulator",
+    "text": "1.2 Understanding Through a Flight Simulator\nA flight simulator does not reproduce every bolt in the aircraft. It reproduces the instruments and the decisions that matter for a flight lesson.\nNetSim reproduces the decisions that matter for a networking lesson: addressing, routing, switching, firewalls and services.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html#discovering-the-tool-with-your-ai-partner",
+    "href": "chapters/01-network-in-browser.html#discovering-the-tool-with-your-ai-partner",
+    "title": "1  A Network in the Browser",
+    "section": "1.3 Discovering the Tool with Your AI Partner",
+    "text": "1.3 Discovering the Tool with Your AI Partner\n\nExploration 1: Separate the Model from the World\nAsk the AI to list what the simulator can and cannot prove.\nNetSim simulates ARP, IPv4 routing, ICMP, TCP, UDP, DHCP, DNS, HTTP,\nstateful firewalls and NAT.\nIt does not simulate IPv6, OSPF/BGP, TLS, real payloads or performance.\n\nFor each capability, write one question the simulator can answer and one\nit cannot. Do not claim the simulator proves more than its model.\nA good answer keeps the model boundary visible.\n\n\nExploration 2: Find the Explainability\nAsk why a deterministic simulator can explain a drop.\nA real kernel drops a packet silently. A deterministic simulator can name\nthe rule, the interface and the exact event. Explain why that matters for\nteaching and for firewall design.\nThe explanation is the pedagogical advantage.\n\n\nExploration 3: Choose the Use\nAsk which tasks fit.\nList five networking tasks. For each, say whether NetSim is a good fit,\na partial fit or the wrong tool. Include production performance testing,\nfirewall rule design, protocol learning and incident response.\nThe answer is a scope decision, not a sales pitch.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html#from-concept-to-practice",
+    "href": "chapters/01-network-in-browser.html#from-concept-to-practice",
+    "title": "1  A Network in the Browser",
+    "section": "1.4 From Concept to Practice",
+    "text": "1.4 From Concept to Practice\nA tool-fit record:\n\n\n\nTask\nFit\nWhy\n\n\n\n\nLearn ARP\nStrong\nVisible packets and tables\n\n\nDesign a firewall\nStrong\nRule model and verdict log\n\n\nTest throughput\nPoor\nNo performance modelling\n\n\nLearn OSPF\nPoor\nNot simulated\n\n\nTeach subnetting\nStrong\nImmediate feedback",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html#build-task",
+    "href": "chapters/01-network-in-browser.html#build-task",
+    "title": "1  A Network in the Browser",
+    "section": "1.5 Build Task",
+    "text": "1.5 Build Task\nOpen the demo topology. Pause the clock, step through one ping, and name every device the packet touched.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html#classroom-connection",
+    "href": "chapters/01-network-in-browser.html#classroom-connection",
+    "title": "1  A Network in the Browser",
+    "section": "1.6 Classroom Connection",
+    "text": "1.6 Classroom Connection\nThe simulator is a glass box. Students can see the packet, the table and the rule. That visibility is the lesson.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html#practice-exercises",
+    "href": "chapters/01-network-in-browser.html#practice-exercises",
+    "title": "1  A Network in the Browser",
+    "section": "1.7 Practice Exercises",
+    "text": "1.7 Practice Exercises\nExercise 1.1 (Level 1). List three things NetSim can explain that a real network cannot. Exercise 1.2 (Level 2). Name three things NetSim does not simulate. Exercise 1.3 (Level 3). Classify five tasks as good, partial or wrong fit. Exercise 1.4 (Level 4). Explain the trade-off between determinism and realism. Exercise 1.5 (Level 5). Write a one-paragraph scope statement for using NetSim in a course.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html#chapter-summary",
+    "href": "chapters/01-network-in-browser.html#chapter-summary",
+    "title": "1  A Network in the Browser",
+    "section": "1.8 Chapter Summary",
+    "text": "1.8 Chapter Summary\n\nNetSim is a browser-based discrete-event simulator.\nIt is deterministic, inspectable and portable.\nIt simulates a curated IPv4 subset, not everything.\nThe explanation of a drop is the pedagogical advantage.\nChoose the tool for the question.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html#reflection",
+    "href": "chapters/01-network-in-browser.html#reflection",
+    "title": "1  A Network in the Browser",
+    "section": "1.9 Reflection",
+    "text": "1.9 Reflection\nBefore moving on, ensure you:\n\nNamed the model boundary\nStepped through one packet\nClassified one task\nExplained the trade-off\nWrote a scope statement",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html#your-learning-journal",
+    "href": "chapters/01-network-in-browser.html#your-learning-journal",
+    "title": "1  A Network in the Browser",
+    "section": "1.10 Your Learning Journal",
+    "text": "1.10 Your Learning Journal\n\nWhat did the animation make visible?\nWhat is outside the model?\nWhere would you still use a real lab?",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-network-in-browser.html#next-steps",
+    "href": "chapters/01-network-in-browser.html#next-steps",
+    "title": "1  A Network in the Browser",
+    "section": "1.11 Next Steps",
+    "text": "1.11 Next Steps\nThe tool is scoped. The next chapter builds a topology.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>A Network in the Browser</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html",
+    "href": "chapters/02-build-topology.html",
+    "title": "2  Build a Topology",
+    "section": "",
+    "text": "2.1 The Concept First\nNetSim’s device palette has six types:\nDrag a device onto the canvas, or click to drop one. Cable two devices by dragging from a dot on one to a dot on the other.\nAddressing can be done in two places: the Inspector fields or a terminal. Both use the same engine, so the result is identical.\nThe starting topology is a claim about the network. Leave unconfigured what the student must configure. Configure what the scenario provides.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html#the-concept-first",
+    "href": "chapters/02-build-topology.html#the-concept-first",
+    "title": "2  Build a Topology",
+    "section": "",
+    "text": "Host: one interface.\nServer: one interface, with service editors.\nSwitch: eight ports, L2 forwarding and VLANs.\nRouter: four interfaces, IPv4 forwarding.\nFirewall: four interfaces and nftables base chains.\nWi-Fi AP: a bridge with wireless client links.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html#understanding-through-a-model-railway",
+    "href": "chapters/02-build-topology.html#understanding-through-a-model-railway",
+    "title": "2  Build a Topology",
+    "section": "2.2 Understanding Through a Model Railway",
+    "text": "2.2 Understanding Through a Model Railway\nA model railway is not a real railway. It is a track plan, a set of trains and a power supply that lets you test a timetable.\nThe topology is the track plan. The addresses and routes are the timetable.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html#discovering-topology-with-your-ai-partner",
+    "href": "chapters/02-build-topology.html#discovering-topology-with-your-ai-partner",
+    "title": "2  Build a Topology",
+    "section": "2.3 Discovering Topology with Your AI Partner",
+    "text": "2.3 Discovering Topology with Your AI Partner\n\nExploration 1: Choose the Devices\nAsk the AI to translate a scenario into devices.\nScenario: two subnets, each with two hosts, joined by a router, with a\nfirewall between the subnets and an internet host.\n\nList the devices, interfaces and links. Mark which device needs a route\nand which needs a firewall rule.\nA good answer separates the topology from the configuration.\n\n\nExploration 2: Plan the Addressing\nAsk for an address plan.\nPlan IPv4 addressing for two LANs, a transit link and an internet host.\nUse private ranges. For each device and interface, give the address,\nprefix and default gateway.\nThe plan is the contract before the commands.\n\n\nExploration 3: Find the Minimum Topology\nAsk what can be removed.\nHere is a topology: [paste it]\nRemove devices and links that do not change the question being tested.\nExplain what each removal changes.\nA smaller topology is easier to debug and grade.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html#from-concept-to-practice",
+    "href": "chapters/02-build-topology.html#from-concept-to-practice",
+    "title": "2  Build a Topology",
+    "section": "2.4 From Concept to Practice",
+    "text": "2.4 From Concept to Practice\nA topology record:\n\n\n\nDevice\nType\nInterfaces\nAddresses\nRole\n\n\n\n\npc1\nHost\neth0\n192.168.1.10/24\nLAN client\n\n\nsw1\nSwitch\n8 ports\nnone\nL2 segment\n\n\nr1\nRouter\neth0, eth1\n.1 on each LAN\nGateway\n\n\nfw1\nFirewall\n4 ports\noutside/inside\nPolicy\n\n\nweb\nServer\neth0\n203.0.113.10/24\nPublic service",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html#build-task",
+    "href": "chapters/02-build-topology.html#build-task",
+    "title": "2  Build a Topology",
+    "section": "2.5 Build Task",
+    "text": "2.5 Build Task\nBuild a two-host, one-switch network. Address both hosts, cable them and ping. Then add a router and a second subnet.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html#classroom-connection",
+    "href": "chapters/02-build-topology.html#classroom-connection",
+    "title": "2  Build a Topology",
+    "section": "2.6 Classroom Connection",
+    "text": "2.6 Classroom Connection\nA topology that fits on one screen is easier to discuss. Start small; add one device only when the question needs it.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html#practice-exercises",
+    "href": "chapters/02-build-topology.html#practice-exercises",
+    "title": "2  Build a Topology",
+    "section": "2.7 Practice Exercises",
+    "text": "2.7 Practice Exercises\nExercise 2.1 (Level 1). Name the six device types. Exercise 2.2 (Level 2). Build a two-host network. Exercise 2.3 (Level 3). Plan addressing for two LANs. Exercise 2.4 (Level 4). Add a router and default routes. Exercise 2.5 (Level 5). Reduce a topology to the minimum that tests the question.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html#chapter-summary",
+    "href": "chapters/02-build-topology.html#chapter-summary",
+    "title": "2  Build a Topology",
+    "section": "2.8 Chapter Summary",
+    "text": "2.8 Chapter Summary\n\nA topology is devices, links and addresses.\nThe palette covers hosts, servers, switches, routers, firewalls and APs.\nAddress in the Inspector or the terminal; the engine is the same.\nLeave the learning to the student.\nStart small.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html#reflection",
+    "href": "chapters/02-build-topology.html#reflection",
+    "title": "2  Build a Topology",
+    "section": "2.9 Reflection",
+    "text": "2.9 Reflection\nBefore moving on, ensure you:\n\nBuilt a two-host network\nCabled the devices\nAddressed the interfaces\nAdded a router\nDrew the topology record",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html#your-learning-journal",
+    "href": "chapters/02-build-topology.html#your-learning-journal",
+    "title": "2  Build a Topology",
+    "section": "2.10 Your Learning Journal",
+    "text": "2.10 Your Learning Journal\n\nWhich device was easiest to miswire?\nWhere did the addressing plan help?\nWhat would you remove next time?",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-build-topology.html#next-steps",
+    "href": "chapters/02-build-topology.html#next-steps",
+    "title": "2  Build a Topology",
+    "section": "2.11 Next Steps",
+    "text": "2.11 Next Steps\nThe topology is built. The next chapter configures it with real syntax.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Build a Topology</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html",
+    "href": "chapters/03-real-syntax.html",
+    "title": "3  Configure with Real Syntax",
+    "section": "",
+    "text": "3.1 The Concept First\nThe terminal supports a subset of iproute2, nft, iptables, DHCP, DNS, HTTP and socket commands.\nCommon commands:\nA firewall is a router with nftables base chains declared. Rules can be written in nft or iptables; both compile to one internal model and list in both dialects.\nThe important design choice: unsupported syntax produces an explicit netsim: \"...\" is not supported error. The tool never silently fakes a command.\nThat is good for learning. It also means you must read the error and check help.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html#the-concept-first",
+    "href": "chapters/03-real-syntax.html#the-concept-first",
+    "title": "3  Configure with Real Syntax",
+    "section": "",
+    "text": "ip addr add 192.168.1.10/24 dev eth0\nip link set eth0 up\nip route add default via 192.168.1.1\nip neigh\nping 192.168.1.20\ntraceroute 203.0.113.10\nsysctl net.ipv4.ip_forward=1",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html#understanding-through-a-language-tutor",
+    "href": "chapters/03-real-syntax.html#understanding-through-a-language-tutor",
+    "title": "3  Configure with Real Syntax",
+    "section": "3.2 Understanding Through a Language Tutor",
+    "text": "3.2 Understanding Through a Language Tutor\nA language tutor who accepts every mistake teaches a private language. A tutor who corrects you teaches the language other people speak.\nNetSim corrects you.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html#discovering-commands-with-your-ai-partner",
+    "href": "chapters/03-real-syntax.html#discovering-commands-with-your-ai-partner",
+    "title": "3  Configure with Real Syntax",
+    "section": "3.3 Discovering Commands with Your AI Partner",
+    "text": "3.3 Discovering Commands with Your AI Partner\n\nExploration 1: Translate the Intent\nAsk the AI to turn an intent into a command.\nIntent: give pc1 the address 10.0.1.10/24 on eth0 and make 10.0.1.1 the\ndefault gateway.\n\nWrite the iproute2 commands. Explain what each command changes and how\nyou would verify it.\nA good answer includes the verification.\n\n\nExploration 2: Read the Error\nAsk what an unsupported command means.\nNetSim returns: netsim: \"ip route show table all\" is not supported.\nExplain what the student should do next. Do not suggest guessing.\nThe next step is help, not a workaround.\n\n\nExploration 3: Compare Inspector and Terminal\nAsk whether the two paths are equivalent.\nAdding an address in the Inspector and with ip addr add both use the same\nengine. Explain why that matters for teaching and for the exported\nconfiguration.\nThe interface is not a separate model.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html#from-concept-to-practice",
+    "href": "chapters/03-real-syntax.html#from-concept-to-practice",
+    "title": "3  Configure with Real Syntax",
+    "section": "3.4 From Concept to Practice",
+    "text": "3.4 From Concept to Practice\nA configuration record:\n\n\n\nDevice\nCommand\nPurpose\nVerification\n\n\n\n\npc1\nip addr add ...\nAddress\nip addr show\n\n\npc1\nip route add default ...\nGateway\nip route\n\n\nr1\nsysctl net.ipv4.ip_forward=1\nForwarding\nsysctl\n\n\nfw1\nnft add rule ...\nPolicy\nnft list ruleset",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html#build-task",
+    "href": "chapters/03-real-syntax.html#build-task",
+    "title": "3  Configure with Real Syntax",
+    "section": "3.5 Build Task",
+    "text": "3.5 Build Task\nConfigure one host and one router from the terminal. Verify every change with a show command. Then break one command on purpose and read the error.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html#classroom-connection",
+    "href": "chapters/03-real-syntax.html#classroom-connection",
+    "title": "3  Configure with Real Syntax",
+    "section": "3.6 Classroom Connection",
+    "text": "3.6 Classroom Connection\nThe loud error is a teaching feature. Students learn the real subset and the habit of checking.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html#practice-exercises",
+    "href": "chapters/03-real-syntax.html#practice-exercises",
+    "title": "3  Configure with Real Syntax",
+    "section": "3.7 Practice Exercises",
+    "text": "3.7 Practice Exercises\nExercise 3.1 (Level 1). Add an address and verify it. Exercise 3.2 (Level 2). Add a default route. Exercise 3.3 (Level 3). Turn on forwarding. Exercise 3.4 (Level 4). Write one nft rule and one iptables rule. Exercise 3.5 (Level 5). Explain why unsupported syntax should fail.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html#chapter-summary",
+    "href": "chapters/03-real-syntax.html#chapter-summary",
+    "title": "3  Configure with Real Syntax",
+    "section": "3.8 Chapter Summary",
+    "text": "3.8 Chapter Summary\n\nNetSim uses a curated subset of real syntax.\nUnsupported commands fail loudly.\nThe Inspector and terminal use the same engine.\nVerify every change.\nhelp is the first troubleshooting step.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html#reflection",
+    "href": "chapters/03-real-syntax.html#reflection",
+    "title": "3  Configure with Real Syntax",
+    "section": "3.9 Reflection",
+    "text": "3.9 Reflection\nBefore moving on, ensure you:\n\nAdded an address\nAdded a route\nEnabled forwarding\nRead one error\nVerified with a show command",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html#your-learning-journal",
+    "href": "chapters/03-real-syntax.html#your-learning-journal",
+    "title": "3  Configure with Real Syntax",
+    "section": "3.10 Your Learning Journal",
+    "text": "3.10 Your Learning Journal\n\nWhich command was easiest to mistype?\nWhat did the error teach you?\nWhy is a loud error better than a silent fake?",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-real-syntax.html#next-steps",
+    "href": "chapters/03-real-syntax.html#next-steps",
+    "title": "3  Configure with Real Syntax",
+    "section": "3.11 Next Steps",
+    "text": "3.11 Next Steps\nThe devices are configured. The next chapter follows a packet.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Configure with Real Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html",
+    "href": "chapters/04-follow-packet.html",
+    "title": "4  Follow a Packet",
+    "section": "",
+    "text": "4.1 The Concept First\nA ping from pc1 to pc2 is not one event. It is a chain:\nNetSim animates ARP in amber, ICMP in blue, TCP in green and UDP in purple. A red ring flashes where a firewall drops a packet.\nThe first ping is often slower because ARP must resolve the MAC. The second is faster because the neighbour table is warm.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html#the-concept-first",
+    "href": "chapters/04-follow-packet.html#the-concept-first",
+    "title": "4  Follow a Packet",
+    "section": "",
+    "text": "The host checks whether the destination is local.\nIf local, it needs the destination MAC. ARP resolves it.\nIf remote, it sends to the default gateway and needs the gateway MAC.\nThe switch learns the source MAC and forwards the frame.\nThe router decrements TTL, checks the route and forwards.\nThe destination replies, and the return path repeats.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html#understanding-through-a-delivery-route",
+    "href": "chapters/04-follow-packet.html#understanding-through-a-delivery-route",
+    "title": "4  Follow a Packet",
+    "section": "4.2 Understanding Through a Delivery Route",
+    "text": "4.2 Understanding Through a Delivery Route\nA parcel moves through a pickup, a depot, a flight and a local van. Each stage has a decision and a record.\nA packet is the parcel. The tables are the depot records.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html#discovering-the-path-with-your-ai-partner",
+    "href": "chapters/04-follow-packet.html#discovering-the-path-with-your-ai-partner",
+    "title": "4  Follow a Packet",
+    "section": "4.3 Discovering the Path with Your AI Partner",
+    "text": "4.3 Discovering the Path with Your AI Partner\n\nExploration 1: Predict the Path\nAsk the AI to trace a packet before you run it.\npc1 192.168.1.10/24, gateway 192.168.1.1\nr1 eth0 192.168.1.1/24, eth1 192.168.2.1/24\npc2 192.168.2.20/24, gateway 192.168.2.1\n\nPredict the path of ping from pc1 to pc2. Include ARP, the switch, the\nrouter, TTL and the return path.\nThe prediction makes the animation meaningful.\n\n\nExploration 2: Find the Drop\nAsk how to explain a failed ping.\nA ping fails. The host has an address, the link is up, and the firewall\nlog shows a drop. List the evidence you would collect in order and the\nrule you would check.\nThe firewall log names the verdict. The route table shows the path.\n\n\nExploration 3: Test the First-Ping Effect\nAsk why the first ping differs.\nThe first ping takes longer than the second. Explain why, and what you\nwould clear to reproduce the first-ping behaviour.\nThe ARP cache is the answer.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html#from-concept-to-practice",
+    "href": "chapters/04-follow-packet.html#from-concept-to-practice",
+    "title": "4  Follow a Packet",
+    "section": "4.4 From Concept to Practice",
+    "text": "4.4 From Concept to Practice\nA packet record:\n\n\n\nStep\nDevice\nDecision\nEvidence\n\n\n\n\n1\npc1\nRemote destination\nip route\n\n\n2\npc1\nNeed gateway MAC\nARP request\n\n\n3\nsw1\nLearn and forward\nMAC table\n\n\n4\nr1\nTTL and route\nip route\n\n\n5\npc2\nReply\nip neigh",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html#build-task",
+    "href": "chapters/04-follow-packet.html#build-task",
+    "title": "4  Follow a Packet",
+    "section": "4.5 Build Task",
+    "text": "4.5 Build Task\nRun a ping with the simulation paused. Step through the packets. Record the ARP request, the ICMP echo, the reply and the tables that changed.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html#classroom-connection",
+    "href": "chapters/04-follow-packet.html#classroom-connection",
+    "title": "4  Follow a Packet",
+    "section": "4.6 Classroom Connection",
+    "text": "4.6 Classroom Connection\nThe pause button is the lesson. Students can point at the packet and explain the decision before it moves.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html#practice-exercises",
+    "href": "chapters/04-follow-packet.html#practice-exercises",
+    "title": "4  Follow a Packet",
+    "section": "4.7 Practice Exercises",
+    "text": "4.7 Practice Exercises\nExercise 4.1 (Level 1). Trace a local ping. Exercise 4.2 (Level 2). Trace a routed ping. Exercise 4.3 (Level 3). Explain the first-ping delay. Exercise 4.4 (Level 4). Find the rule behind a firewall drop. Exercise 4.5 (Level 5). Draw the forward and return paths.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html#chapter-summary",
+    "href": "chapters/04-follow-packet.html#chapter-summary",
+    "title": "4  Follow a Packet",
+    "section": "4.8 Chapter Summary",
+    "text": "4.8 Chapter Summary\n\nA packet is a chain of decisions.\nARP resolves a MAC before a frame can be sent.\nSwitches learn and forward; routers route and decrement TTL.\nThe firewall log names the rule.\nPause and step to explain.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html#reflection",
+    "href": "chapters/04-follow-packet.html#reflection",
+    "title": "4  Follow a Packet",
+    "section": "4.9 Reflection",
+    "text": "4.9 Reflection\nBefore moving on, ensure you:\n\nPredicted a path\nStepped through a ping\nFound the ARP exchange\nRead a table\nExplained a drop",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html#your-learning-journal",
+    "href": "chapters/04-follow-packet.html#your-learning-journal",
+    "title": "4  Follow a Packet",
+    "section": "4.10 Your Learning Journal",
+    "text": "4.10 Your Learning Journal\n\nWhich decision surprised you?\nWhat did the table show that the animation did not?\nWhere would you pause next time?",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-follow-packet.html#next-steps",
+    "href": "chapters/04-follow-packet.html#next-steps",
+    "title": "4  Follow a Packet",
+    "section": "4.11 Next Steps",
+    "text": "4.11 Next Steps\nThe packet is visible. The next chapter tests policy with firewalls.",
+    "crumbs": [
+      "Use the Simulator",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Follow a Packet</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html",
+    "href": "chapters/05-firewalls.html",
+    "title": "5  Firewalls",
+    "section": "",
+    "text": "5.1 The Concept First\nNetSim firewalls support nft and iptables front-ends over one internal rule model. A rule added in one dialect lists in both.\nThe model covers:\nA firewall is a router with base chains declared. It also has a per-device log that names the exact rule behind every verdict.\nDROP is silent. REJECT sends an ICMP unreachable or a TCP reset. The difference matters: a client sees a timeout for a drop and a refusal for a reject.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html#the-concept-first",
+    "href": "chapters/05-firewalls.html#the-concept-first",
+    "title": "5  Firewalls",
+    "section": "",
+    "text": "input, forward and output chains\naccept, drop and reject verdicts\nchain policies\nconnection tracking (ct state new,established,related)\nNAT: masquerade, SNAT and DNAT port forwarding",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html#understanding-through-a-nightclub-door",
+    "href": "chapters/05-firewalls.html#understanding-through-a-nightclub-door",
+    "title": "5  Firewalls",
+    "section": "5.2 Understanding Through a Nightclub Door",
+    "text": "5.2 Understanding Through a Nightclub Door\nA door policy is an ordered list. The first matching rule decides. A broad accept at the top makes every later drop irrelevant.\nA firewall is the door. The log is the bouncer’s note.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html#discovering-firewalls-with-your-ai-partner",
+    "href": "chapters/05-firewalls.html#discovering-firewalls-with-your-ai-partner",
+    "title": "5  Firewalls",
+    "section": "5.3 Discovering Firewalls with Your AI Partner",
+    "text": "5.3 Discovering Firewalls with Your AI Partner\n\nExploration 1: Write the Policy First\nAsk the AI to state the policy in plain language.\nA LAN may reach the internet. The internet may reach the public web\nserver on tcp/80 only. Everything else is dropped.\n\nWrite the firewall policy in plain language, then the nftables rules.\nDo not write the rules first.\nThe policy is the intent. The rules are the implementation.\n\n\nExploration 2: Test DROP and REJECT\nAsk how the client sees each.\nCompare a silent drop and a reject for tcp/22 from the internet. What does\nthe client see, what does the log show and which verdict is appropriate?\nA drop is quiet; a reject is a message.\n\n\nExploration 3: Read the Verdict\nAsk how to explain a blocked packet.\nA packet was dropped. List the evidence you would collect: chain, rule,\nsource, destination, protocol and state. Explain why the log is better\nthan guessing.\nThe log is the explanation.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html#from-concept-to-practice",
+    "href": "chapters/05-firewalls.html#from-concept-to-practice",
+    "title": "5  Firewalls",
+    "section": "5.4 From Concept to Practice",
+    "text": "5.4 From Concept to Practice\nA firewall record:\n\n\n\nField\nEntry\n\n\n\n\nDevice\nfw1\n\n\nChain\nforward\n\n\nPolicy\ndrop\n\n\nRule\nallow LAN to WAN, allow tcp/80 in\n\n\nState\nestablished,related\n\n\nLog\nrule ID and verdict\n\n\nTest\nallowed path and denied path",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html#build-task",
+    "href": "chapters/05-firewalls.html#build-task",
+    "title": "5  Firewalls",
+    "section": "5.5 Build Task",
+    "text": "5.5 Build Task\nStart with a default-deny policy. Allow the LAN out and tcp/80 in. Test both the allowed and denied paths. Read the log for the denial.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html#classroom-connection",
+    "href": "chapters/05-firewalls.html#classroom-connection",
+    "title": "5  Firewalls",
+    "section": "5.6 Classroom Connection",
+    "text": "5.6 Classroom Connection\nFirewalls are where students learn that order and policy are design decisions. The log makes the decision visible.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html#practice-exercises",
+    "href": "chapters/05-firewalls.html#practice-exercises",
+    "title": "5  Firewalls",
+    "section": "5.7 Practice Exercises",
+    "text": "5.7 Practice Exercises\nExercise 5.1 (Level 1). Name the three chains. Exercise 5.2 (Level 2). Write a default-deny policy. Exercise 5.3 (Level 3). Add a stateful allow rule. Exercise 5.4 (Level 4). Compare DROP and REJECT. Exercise 5.5 (Level 5). Add DNAT to a DMZ web server and test it.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html#chapter-summary",
+    "href": "chapters/05-firewalls.html#chapter-summary",
+    "title": "5  Firewalls",
+    "section": "5.8 Chapter Summary",
+    "text": "5.8 Chapter Summary\n\nNetSim firewalls use nft and iptables over one model.\nChains, policies and verdicts decide the packet.\nStateful rules allow replies.\nDROP and REJECT look different to the client.\nThe log names the rule.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html#reflection",
+    "href": "chapters/05-firewalls.html#reflection",
+    "title": "5  Firewalls",
+    "section": "5.9 Reflection",
+    "text": "5.9 Reflection\nBefore moving on, ensure you:\n\nWrote the policy\nSet default deny\nAllowed one path\nDenied another\nRead the log",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html#your-learning-journal",
+    "href": "chapters/05-firewalls.html#your-learning-journal",
+    "title": "5  Firewalls",
+    "section": "5.10 Your Learning Journal",
+    "text": "5.10 Your Learning Journal\n\nWhich rule was easiest to misorder?\nWhat did the client see for a drop?\nWhen would you use REJECT?",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-firewalls.html#next-steps",
+    "href": "chapters/05-firewalls.html#next-steps",
+    "title": "5  Firewalls",
+    "section": "5.11 Next Steps",
+    "text": "5.11 Next Steps\nThe firewall decides. The next chapter adds the services that depend on it.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Firewalls</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html",
+    "href": "chapters/06-services.html",
+    "title": "6  Services",
+    "section": "",
+    "text": "6.1 The Concept First\nNetSim runs services as real packet exchanges:\nAll service traffic animates on the wire. Block UDP/67 and DHCP dies. Block UDP/53 and DNS dies. Block TCP/80 and the web dies.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html#the-concept-first",
+    "href": "chapters/06-services.html#the-concept-first",
+    "title": "6  Services",
+    "section": "",
+    "text": "DHCP: dhclient sends DISCOVER, receives OFFER, sends REQUEST and receives ACK. The client installs the address, default route and nameserver.\nDNS: an A-record server answers dig over UDP/53. Hostname resolution is wired into ping, traceroute, nc and curl.\nHTTP: a configurable web server answers curl over the simulated TCP handshake.\nTCP/UDP: nc tests ports, nc -l listens, ss and conntrack -L show state.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html#understanding-through-a-postal-service",
+    "href": "chapters/06-services.html#understanding-through-a-postal-service",
+    "title": "6  Services",
+    "section": "6.2 Understanding Through a Postal Service",
+    "text": "6.2 Understanding Through a Postal Service\nDHCP is the address assignment desk. DNS is the directory. HTTP is the parcel.\nEach has a protocol, a server and a failure mode.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html#discovering-services-with-your-ai-partner",
+    "href": "chapters/06-services.html#discovering-services-with-your-ai-partner",
+    "title": "6  Services",
+    "section": "6.3 Discovering Services with Your AI Partner",
+    "text": "6.3 Discovering Services with Your AI Partner\n\nExploration 1: Trace DHCP\nAsk the AI to label the four packets.\ndhclient runs on pc2 against a DHCP server. List the four packets, the\ndirection, the transport and what the client installs after the ACK.\nA good answer names DISCOVER, OFFER, REQUEST and ACK.\n\n\nExploration 2: Break DNS\nAsk what happens when UDP/53 is blocked.\nA firewall drops udp/53 between pc2 and the DNS server. Explain what\nhappens to dig, ping by name and curl by name. What still works by IP?\nThe failure is specific, not “the network is down”.\n\n\nExploration 3: Test the Web\nAsk how to read a curl failure.\ncurl http://web.lan/ fails. List the checks in order: DNS, route, TCP\nconnect, firewall and server. Explain what each result would tell you.\nA structured diagnosis beats guessing.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html#from-concept-to-practice",
+    "href": "chapters/06-services.html#from-concept-to-practice",
+    "title": "6  Services",
+    "section": "6.4 From Concept to Practice",
+    "text": "6.4 From Concept to Practice\nA service record:\n\n\n\nService\nClient\nServer\nPort\nEvidence\n\n\n\n\nDHCP\npc2\ndhcp\nUDP/67\nip addr, lease\n\n\nDNS\npc2\ndns\nUDP/53\ndig\n\n\nHTTP\npc2\nweb\nTCP/80\ncurl -v\n\n\nTest\npc2\ntarget\nTCP\nnc",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html#build-task",
+    "href": "chapters/06-services.html#build-task",
+    "title": "6  Services",
+    "section": "6.5 Build Task",
+    "text": "6.5 Build Task\nRun dhclient, then dig, then curl. Capture the packets and the state each step installs.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html#classroom-connection",
+    "href": "chapters/06-services.html#classroom-connection",
+    "title": "6  Services",
+    "section": "6.6 Classroom Connection",
+    "text": "6.6 Classroom Connection\nServices teach dependency. A web request depends on DNS, routing and TCP. The failure points are the lesson.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html#practice-exercises",
+    "href": "chapters/06-services.html#practice-exercises",
+    "title": "6  Services",
+    "section": "6.7 Practice Exercises",
+    "text": "6.7 Practice Exercises\nExercise 6.1 (Level 1). Name the four DHCP packets. Exercise 6.2 (Level 2). Resolve a name with dig. Exercise 6.3 (Level 3). Fetch a page with curl. Exercise 6.4 (Level 4). Block DNS and explain the failures. Exercise 6.5 (Level 5). Diagnose a curl failure in order.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html#chapter-summary",
+    "href": "chapters/06-services.html#chapter-summary",
+    "title": "6  Services",
+    "section": "6.8 Chapter Summary",
+    "text": "6.8 Chapter Summary\n\nServices are packet exchanges.\nDHCP assigns address, route and nameserver.\nDNS resolves names over UDP/53.\nHTTP runs over TCP.\nService traffic can be firewalled.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html#reflection",
+    "href": "chapters/06-services.html#reflection",
+    "title": "6  Services",
+    "section": "6.9 Reflection",
+    "text": "6.9 Reflection\nBefore moving on, ensure you:\n\nTraced DHCP\nRan dig\nRan curl\nBlocked one service\nDiagnosed one failure",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html#your-learning-journal",
+    "href": "chapters/06-services.html#your-learning-journal",
+    "title": "6  Services",
+    "section": "6.10 Your Learning Journal",
+    "text": "6.10 Your Learning Journal\n\nWhich service was easiest to break?\nWhat did the client install?\nWhere did the failure appear first?",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-services.html#next-steps",
+    "href": "chapters/06-services.html#next-steps",
+    "title": "6  Services",
+    "section": "6.11 Next Steps",
+    "text": "6.11 Next Steps\nThe services work. The next chapter uses the bundled labs and auto-grader.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Services</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html",
+    "href": "chapters/07-labs-and-grading.html",
+    "title": "7  Labs and Auto-Grading",
+    "section": "",
+    "text": "7.1 The Concept First\nNetSim ships five guided labs:\nEach lab has steps, objectives and quizzes. The Check objectives button runs the checks against the live simulation using real packets. Students see the grader’s probes animate.\nThe checks are passive or active. Passive checks read device state, such as an interface address or a firewall policy. Active checks send packets, such as a ping, a TCP connect, a DNS query or an HTTP fetch.\nA lab is not a quiz with a network attached. It is a scenario with evidence.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html#the-concept-first",
+    "href": "chapters/07-labs-and-grading.html#the-concept-first",
+    "title": "7  Labs and Auto-Grading",
+    "section": "",
+    "text": "Static addressing and ARP\nRouting between networks\nBuild a stateful firewall\nDHCP, DNS and the web\nHarden a vulnerable network",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html#understanding-through-a-driving-test",
+    "href": "chapters/07-labs-and-grading.html#understanding-through-a-driving-test",
+    "title": "7  Labs and Auto-Grading",
+    "section": "7.2 Understanding Through a Driving Test",
+    "text": "7.2 Understanding Through a Driving Test\nA driving test does not ask whether you read the manual. It watches you drive.\nA NetSim lab watches the packets.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html#discovering-the-labs-with-your-ai-partner",
+    "href": "chapters/07-labs-and-grading.html#discovering-the-labs-with-your-ai-partner",
+    "title": "7  Labs and Auto-Grading",
+    "section": "7.3 Discovering the Labs with Your AI Partner",
+    "text": "7.3 Discovering the Labs with Your AI Partner\n\nExploration 1: Map Lab to Concept\nAsk the AI to match each lab to a concept.\nHere are the five NetSim labs:\n[paste them]\n\nFor each, name the main concept and one check that proves it. Explain\nwhy a passive check is not enough on its own.\nActive checks prove behaviour; passive checks prove configuration.\n\n\nExploration 2: Prove the Problem\nAsk why a security lab checks the vulnerability first.\nLab 5 asks students to confirm the exposure before they harden it.\nExplain why this is better than starting with the fix. What does it\nteach about evidence?\nThe first objective establishes the current state.\n\n\nExploration 3: Choose the Verdict\nAsk about filtered versus refused.\nA firewall drops tcp/22 silently. Another rejects it. Which check should\na hardening lab use, and what does the student learn from the difference?\nA silent drop is usually the stronger security outcome.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html#from-concept-to-practice",
+    "href": "chapters/07-labs-and-grading.html#from-concept-to-practice",
+    "title": "7  Labs and Auto-Grading",
+    "section": "7.4 From Concept to Practice",
+    "text": "7.4 From Concept to Practice\nA lab record:\n\n\n\n\n\n\n\n\n\nLab\nConcept\nObjective\nCheck\n\n\n\n\n1\nAddressing and ARP\nHosts can ping\nping\n\n\n2\nRouting\nPacket crosses router\nping, traceroute\n\n\n3\nStateful firewall\nLAN out, internet in blocked\ntcp, fw-policy\n\n\n4\nServices\nDHCP, DNS, HTTP work\ndns, http\n\n\n5\nHardening\nPublic web reachable, rest filtered\ntcp filtered",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html#build-task",
+    "href": "chapters/07-labs-and-grading.html#build-task",
+    "title": "7  Labs and Auto-Grading",
+    "section": "7.5 Build Task",
+    "text": "7.5 Build Task\nComplete Lab 1 and export the attempt. Then import it and check the objectives again.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html#classroom-connection",
+    "href": "chapters/07-labs-and-grading.html#classroom-connection",
+    "title": "7  Labs and Auto-Grading",
+    "section": "7.6 Classroom Connection",
+    "text": "7.6 Classroom Connection\nAuto-grading gives immediate feedback. It is formative, not a proctored exam. The attempt file is editable, so use it for learning and evidence, not high-stakes assessment.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html#practice-exercises",
+    "href": "chapters/07-labs-and-grading.html#practice-exercises",
+    "title": "7  Labs and Auto-Grading",
+    "section": "7.7 Practice Exercises",
+    "text": "7.7 Practice Exercises\nExercise 7.1 (Level 1). Name the five labs. Exercise 7.2 (Level 2). Complete Lab 1. Exercise 7.3 (Level 3). Explain one active check. Exercise 7.4 (Level 4). Compare filtered and refused. Exercise 7.5 (Level 5). Export, import and regrade an attempt.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html#chapter-summary",
+    "href": "chapters/07-labs-and-grading.html#chapter-summary",
+    "title": "7  Labs and Auto-Grading",
+    "section": "7.8 Chapter Summary",
+    "text": "7.8 Chapter Summary\n\nA lab is a topology, steps and objectives.\nActive checks send packets; passive checks read state.\nThe grader’s probes animate.\nProve the problem before the fix.\nAuto-grading is formative.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html#reflection",
+    "href": "chapters/07-labs-and-grading.html#reflection",
+    "title": "7  Labs and Auto-Grading",
+    "section": "7.9 Reflection",
+    "text": "7.9 Reflection\nBefore moving on, ensure you:\n\nCompleted one lab\nRead an objective\nWatched a probe\nExported an attempt\nRegraded it",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html#your-learning-journal",
+    "href": "chapters/07-labs-and-grading.html#your-learning-journal",
+    "title": "7  Labs and Auto-Grading",
+    "section": "7.10 Your Learning Journal",
+    "text": "7.10 Your Learning Journal\n\nWhich objective was clearest?\nWhat did the probe prove?\nWhere is auto-grading weakest?",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-labs-and-grading.html#next-steps",
+    "href": "chapters/07-labs-and-grading.html#next-steps",
+    "title": "7  Labs and Auto-Grading",
+    "section": "7.11 Next Steps",
+    "text": "7.11 Next Steps\nThe labs work. The next chapter designs one.",
+    "crumbs": [
+      "Test and Harden",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Labs and Auto-Grading</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html",
+    "href": "chapters/08-design-a-lab.html",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "",
+    "text": "8.1 The Concept First\nA NetSim objective has an id, a student-facing label and a check. The check is passive or active.\nCommon check types:\nThe design question is not “what did I teach?” It is “what evidence would prove the student did it?”",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html#the-concept-first",
+    "href": "chapters/08-design-a-lab.html#the-concept-first",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "",
+    "text": "iface-ip: an interface has an address or an address in a subnet.\ndefault-route: a default route exists, optionally via a gateway.\nforwarding: IP forwarding matches the expected value.\nfw-policy: a chain policy matches.\nping: an ICMP echo succeeds or fails.\ntcp: a TCP connect is open, refused or filtered.\ndns: a name resolves or returns NXDOMAIN.\nhttp: a GET succeeds, optionally with a required string.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html#understanding-through-a-building-inspection",
+    "href": "chapters/08-design-a-lab.html#understanding-through-a-building-inspection",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "8.2 Understanding Through a Building Inspection",
+    "text": "8.2 Understanding Through a Building Inspection\nAn inspector does not ask whether the builder read the code. The inspector checks the exit, the alarm and the record.\nA lab objective is the check. The step is the instruction.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html#discovering-objectives-with-your-ai-partner",
+    "href": "chapters/08-design-a-lab.html#discovering-objectives-with-your-ai-partner",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "8.3 Discovering Objectives with Your AI Partner",
+    "text": "8.3 Discovering Objectives with Your AI Partner\n\nExploration 1: Turn a Step into a Check\nAsk the AI to choose a check.\nStep: \"Give pc1 the address 192.168.1.10/24 on eth0.\"\nWrite the objective and the check. Then write a second objective that\nproves the host can reach its gateway.\nOne check for configuration, one for behaviour.\n\n\nExploration 2: Prove the Problem\nAsk for a vulnerability-first objective.\nA lab asks students to harden a network. Write an objective that passes\nwhile the vulnerability exists, then the objective that passes after the\nfix. Explain the order.\nThe first objective establishes the baseline.\n\n\nExploration 3: Find the Weak Check\nAsk what a check misses.\nA lab checks that tcp/22 is filtered from the internet. What does that\nnot prove? Write a second check that closes the gap.\nA check is evidence for one claim, not all claims.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html#from-concept-to-practice",
+    "href": "chapters/08-design-a-lab.html#from-concept-to-practice",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "8.4 From Concept to Practice",
+    "text": "8.4 From Concept to Practice\nAn objective record:\n\n\n\nField\nEntry\n\n\n\n\nID\nl6-ip\n\n\nLabel\npc1 has an address in 192.168.1.0/24\n\n\nCheck\niface-ip\n\n\nDevice\npc1\n\n\nInterface\neth0\n\n\nSubnet\n192.168.1.0/24\n\n\nType\nPassive",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html#build-task",
+    "href": "chapters/08-design-a-lab.html#build-task",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "8.5 Build Task",
+    "text": "8.5 Build Task\nWrite three objectives for one step: one configuration, one behaviour and one failure. Test them in the app.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html#classroom-connection",
+    "href": "chapters/08-design-a-lab.html#classroom-connection",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "8.6 Classroom Connection",
+    "text": "8.6 Classroom Connection\nObjectives make the assessment transparent. The student knows what evidence is required, and the grader can show why it passed or failed.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html#practice-exercises",
+    "href": "chapters/08-design-a-lab.html#practice-exercises",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "8.7 Practice Exercises",
+    "text": "8.7 Practice Exercises\nExercise 8.1 (Level 1). Name three check types. Exercise 8.2 (Level 2). Write an iface-ip objective. Exercise 8.3 (Level 3). Write a ping objective. Exercise 8.4 (Level 4). Write a vulnerability-first objective. Exercise 8.5 (Level 5). Find a check that can pass while the student has not learned the concept, and fix it.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html#chapter-summary",
+    "href": "chapters/08-design-a-lab.html#chapter-summary",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "8.8 Chapter Summary",
+    "text": "8.8 Chapter Summary\n\nAn objective is a testable claim.\nPassive checks read state; active checks send packets.\nUse a configuration check and a behaviour check.\nProve the problem before the fix.\nA check is evidence for one claim.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html#reflection",
+    "href": "chapters/08-design-a-lab.html#reflection",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "8.9 Reflection",
+    "text": "8.9 Reflection\nBefore moving on, ensure you:\n\nWrote one objective\nChose the right check\nTested it\nWrote a failure check\nFound a weak check",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html#your-learning-journal",
+    "href": "chapters/08-design-a-lab.html#your-learning-journal",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "8.10 Your Learning Journal",
+    "text": "8.10 Your Learning Journal\n\nWhich check was strongest?\nWhat did a passive check miss?\nWhere could a student game the check?",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/08-design-a-lab.html#next-steps",
+    "href": "chapters/08-design-a-lab.html#next-steps",
+    "title": "8  Design a Lab That Checks the Right Thing",
+    "section": "8.11 Next Steps",
+    "text": "8.11 Next Steps\nThe objectives are designed. The next chapter writes and distributes the lab.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Design a Lab That Checks the Right Thing</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html",
+    "href": "chapters/09-write-and-distribute.html",
+    "title": "9  Write and Distribute a Lab",
+    "section": "",
+    "text": "9.1 The Concept First\nA NetSim lab file has the same shape as a topology, plus a top-level lab object:\nA step has a title, a body, objectives and an optional quiz. A quiz answer is a zero-based index.\nThe recommended authoring path:",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html#the-concept-first",
+    "href": "chapters/09-write-and-distribute.html#the-concept-first",
+    "title": "9  Write and Distribute a Lab",
+    "section": "",
+    "text": "{\n  \"app\": \"netsim\",\n  \"version\": 1,\n  \"devices\": [],\n  \"links\": [],\n  \"lab\": {\n    \"id\": \"my-lab\",\n    \"title\": \"Lab 6 - My topic\",\n    \"blurb\": \"One line for the Labs menu.\",\n    \"steps\": []\n  }\n}\n\n\n\nBuild the starting topology in NetSim.\nExport the topology JSON.\nAdd the lab block.\nImport it back and test as a student.\nIterate until every objective goes green at the right time.\nDistribute the file or a share link.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html#understanding-through-a-lesson-plan",
+    "href": "chapters/09-write-and-distribute.html#understanding-through-a-lesson-plan",
+    "title": "9  Write and Distribute a Lab",
+    "section": "9.2 Understanding Through a Lesson Plan",
+    "text": "9.2 Understanding Through a Lesson Plan\nA lesson plan has objectives, activities and a check. A lab file is the same, with a topology attached.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html#discovering-the-format-with-your-ai-partner",
+    "href": "chapters/09-write-and-distribute.html#discovering-the-format-with-your-ai-partner",
+    "title": "9  Write and Distribute a Lab",
+    "section": "9.3 Discovering the Format with Your AI Partner",
+    "text": "9.3 Discovering the Format with Your AI Partner\n\nExploration 1: Build the Skeleton\nAsk the AI to draft the JSON.\nWrite a NetSim lab skeleton for a two-host addressing lab. Include the\nlab id, title, blurb, one step with a title, body, two objectives and\none quiz question. Use JSON, not prose.\nA skeleton is easier to review than a blank file.\n\n\nExploration 2: Test the Check\nAsk what could go wrong.\nA lab objective uses `iface-ip` with `inSubnet`. List the ways it could\npass without the student understanding subnetting. Write a stronger\nsecond check.\nA check is not a lesson.\n\n\nExploration 3: Plan Distribution\nAsk how to hand it out.\nCompare distributing a lab as a JSON file, a share link and a bundled\nlab in the repository. Include the trade-offs for updating, versioning\nand collecting attempts.\nEach route has a maintenance cost.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html#from-concept-to-practice",
+    "href": "chapters/09-write-and-distribute.html#from-concept-to-practice",
+    "title": "9  Write and Distribute a Lab",
+    "section": "9.4 From Concept to Practice",
+    "text": "9.4 From Concept to Practice\nA lab distribution record:\n\n\n\nField\nEntry\n\n\n\n\nLab ID\nl6-addressing\n\n\nVersion\n1\n\n\nDistribution\nFile or share link\n\n\nObjective IDs\nStable\n\n\nQuiz\nOne question\n\n\nAttempt export\nEnabled\n\n\nMarking\nImport and regrade",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html#build-task",
+    "href": "chapters/09-write-and-distribute.html#build-task",
+    "title": "9  Write and Distribute a Lab",
+    "section": "9.5 Build Task",
+    "text": "9.5 Build Task\nCreate a one-step lab with two objectives and one quiz question. Distribute it as a file and as a share link.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html#classroom-connection",
+    "href": "chapters/09-write-and-distribute.html#classroom-connection",
+    "title": "9  Write and Distribute a Lab",
+    "section": "9.6 Classroom Connection",
+    "text": "9.6 Classroom Connection\nA stable ID is a contract with saved progress. Renaming it resets the objective for every student.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html#practice-exercises",
+    "href": "chapters/09-write-and-distribute.html#practice-exercises",
+    "title": "9  Write and Distribute a Lab",
+    "section": "9.7 Practice Exercises",
+    "text": "9.7 Practice Exercises\nExercise 9.1 (Level 1). Name the top-level lab keys. Exercise 9.2 (Level 2). Write one step. Exercise 9.3 (Level 3). Add two objectives. Exercise 9.4 (Level 4). Add a quiz question. Exercise 9.5 (Level 5). Distribute the lab and collect one attempt.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html#chapter-summary",
+    "href": "chapters/09-write-and-distribute.html#chapter-summary",
+    "title": "9  Write and Distribute a Lab",
+    "section": "9.8 Chapter Summary",
+    "text": "9.8 Chapter Summary\n\nA lab is a topology plus a lab block.\nSteps contain objectives and quizzes.\nBuild the topology visually, then add the JSON.\nTest as a student before distributing.\nKeep objective IDs stable.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html#reflection",
+    "href": "chapters/09-write-and-distribute.html#reflection",
+    "title": "9  Write and Distribute a Lab",
+    "section": "9.9 Reflection",
+    "text": "9.9 Reflection\nBefore moving on, ensure you:\n\nBuilt the topology\nAdded the lab block\nTested the objectives\nAdded a quiz\nDistributed the file",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html#your-learning-journal",
+    "href": "chapters/09-write-and-distribute.html#your-learning-journal",
+    "title": "9  Write and Distribute a Lab",
+    "section": "9.10 Your Learning Journal",
+    "text": "9.10 Your Learning Journal\n\nWhich field was easiest to forget?\nWhat did the test reveal?\nWhich distribution route fits your class?",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/09-write-and-distribute.html#next-steps",
+    "href": "chapters/09-write-and-distribute.html#next-steps",
+    "title": "9  Write and Distribute a Lab",
+    "section": "9.11 Next Steps",
+    "text": "9.11 Next Steps\nThe lab is distributed. The final chapter exports the design to real systems.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Write and Distribute a Lab</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html",
+    "href": "chapters/10-export-real.html",
+    "title": "10  Export to the Real World",
+    "section": "",
+    "text": "10.1 The Concept First\nNetSim exports more than a picture:\nThe generated configs are validated in CI against the real nft and dnsmasq binaries. That is the bridge from the simulator to a real machine.\nThe export is not a promise that the real network will behave identically. It is a starting point that preserves the design.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html#the-concept-first",
+    "href": "chapters/10-export-real.html#the-concept-first",
+    "title": "10  Export to the Real World",
+    "section": "",
+    "text": "Device config bundle (.zip): per-device setup.sh, nftables.conf and dnsmasq.conf.\nContainerlab topology: a .clab.yml with Linux nodes and firewall rules.\nDocker Compose: an approximate L2 topology.\nSVG/PNG diagrams: documentation-grade topology images.\nPrintable HTML report: diagram, inventory, cabling, routing tables, DHCP/DNS and firewall rulesets.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html#understanding-through-a-building-plan",
+    "href": "chapters/10-export-real.html#understanding-through-a-building-plan",
+    "title": "10  Export to the Real World",
+    "section": "10.2 Understanding Through a Building Plan",
+    "text": "10.2 Understanding Through a Building Plan\nA building plan is not the building. It is the document a builder can follow.\nThe export is the plan. The real network is the building.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html#discovering-exports-with-your-ai-partner",
+    "href": "chapters/10-export-real.html#discovering-exports-with-your-ai-partner",
+    "title": "10  Export to the Real World",
+    "section": "10.3 Discovering Exports with Your AI Partner",
+    "text": "10.3 Discovering Exports with Your AI Partner\n\nExploration 1: Choose the Export\nAsk which export fits the task.\nA team wants to hand a firewall design to an engineer, run it in a lab,\nand include it in a report. Which NetSim exports fit each task? Explain\nthe limits.\nDifferent artefacts for different readers.\n\n\nExploration 2: Review the Config\nAsk what to check before running it.\nHere is a generated nftables.conf:\n[paste it]\n\nList the checks before applying it to a real host: interfaces, addresses,\ndefault policy, rule order, NAT and rollback.\nA generated config is a draft until reviewed.\n\n\nExploration 3: Compare Simulation and Reality\nAsk what changes.\nThe simulated network works. The real containerlab deployment does not.\nList the differences that could explain it: interface names, kernel\nsettings, L2 behaviour, image versions and timing.\nThe export removes typing, not thinking.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html#from-concept-to-practice",
+    "href": "chapters/10-export-real.html#from-concept-to-practice",
+    "title": "10  Export to the Real World",
+    "section": "10.4 From Concept to Practice",
+    "text": "10.4 From Concept to Practice\nAn export record:\n\n\n\nArtefact\nReader\nCheck\n\n\n\n\nsetup.sh\nEngineer\nInterfaces and routes\n\n\nnftables.conf\nFirewall owner\nPolicy and order\n\n\ndnsmasq.conf\nService owner\nRecords and upstreams\n\n\n.clab.yml\nLab owner\nImages and links\n\n\nDiagram/report\nStakeholder\nAccuracy and scope",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html#build-task",
+    "href": "chapters/10-export-real.html#build-task",
+    "title": "10  Export to the Real World",
+    "section": "10.5 Build Task",
+    "text": "10.5 Build Task\nExport one topology as a config bundle and a diagram. Review the firewall config before running anything.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html#classroom-connection",
+    "href": "chapters/10-export-real.html#classroom-connection",
+    "title": "10  Export to the Real World",
+    "section": "10.6 Classroom Connection",
+    "text": "10.6 Classroom Connection\nThe export is the assessment bridge. A student can show the design, the config and the report, not only a canvas.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html#practice-exercises",
+    "href": "chapters/10-export-real.html#practice-exercises",
+    "title": "10  Export to the Real World",
+    "section": "10.7 Practice Exercises",
+    "text": "10.7 Practice Exercises\nExercise 10.1 (Level 1). Name three export types. Exercise 10.2 (Level 2). Export a topology JSON. Exercise 10.3 (Level 3). Export a config bundle. Exercise 10.4 (Level 4). Review a generated nftables config. Exercise 10.5 (Level 5). Deploy a containerlab export and compare it with the simulation.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html#chapter-summary",
+    "href": "chapters/10-export-real.html#chapter-summary",
+    "title": "10  Export to the Real World",
+    "section": "10.8 Chapter Summary",
+    "text": "10.8 Chapter Summary\n\nNetSim exports configs, containerlab, Compose, diagrams and reports.\nThe config bundle is the bridge to a real machine.\nGenerated configs need review.\nThe export preserves the design, not the behaviour guarantee.\nRemove typing, not thinking.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html#reflection",
+    "href": "chapters/10-export-real.html#reflection",
+    "title": "10  Export to the Real World",
+    "section": "10.9 Reflection",
+    "text": "10.9 Reflection\nBefore moving on, ensure you:\n\nChose an export\nExported a topology\nReviewed a config\nExported a diagram\nNamed one simulation limit",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html#your-learning-journal",
+    "href": "chapters/10-export-real.html#your-learning-journal",
+    "title": "10  Export to the Real World",
+    "section": "10.10 Your Learning Journal",
+    "text": "10.10 Your Learning Journal\n\nWhich export was most useful?\nWhat did the config review catch?\nWhere would reality differ?",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/10-export-real.html#next-steps",
+    "href": "chapters/10-export-real.html#next-steps",
+    "title": "10  Export to the Real World",
+    "section": "10.11 Next Steps",
+    "text": "10.11 Next Steps\nThe design is exported. The appendices collect the lab map and the check types.",
+    "crumbs": [
+      "Author and Export",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Export to the Real World</span>"
+    ]
+  },
+  {
+    "objectID": "appendices/a-lab-map.html",
+    "href": "appendices/a-lab-map.html",
+    "title": "Appendix A — Lab Map",
+    "section": "",
+    "text": "A.1 Example networks",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Lab Map</span>"
+    ]
+  },
+  {
+    "objectID": "appendices/a-lab-map.html#example-networks",
+    "href": "appendices/a-lab-map.html#example-networks",
+    "title": "Appendix A — Lab Map",
+    "section": "",
+    "text": "Segmented network: LAN and DMZ behind a stateful firewall, masquerade outbound, tcp/80 DNAT to the DMZ web server.\nFlat open network: one segment, exposed services, no rules. Use it to find every problem or as the starting point for a hardening exercise.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Lab Map</span>"
+    ]
+  },
+  {
+    "objectID": "appendices/a-lab-map.html#suggested-teaching-route",
+    "href": "appendices/a-lab-map.html#suggested-teaching-route",
+    "title": "Appendix A — Lab Map",
+    "section": "A.2 Suggested teaching route",
+    "text": "A.2 Suggested teaching route\n\nLab 1: addressing and ARP.\nLab 2: routing.\nLab 4: services.\nLab 3: firewall.\nLab 5: hardening.\n\nThe order can vary. The concepts build from local delivery to policy.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Lab Map</span>"
+    ]
+  },
+  {
+    "objectID": "appendices/b-check-types.html",
+    "href": "appendices/b-check-types.html",
+    "title": "Appendix B — Check Types",
+    "section": "",
+    "text": "B.1 Design tips",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Check Types</span>"
+    ]
+  },
+  {
+    "objectID": "appendices/b-check-types.html#design-tips",
+    "href": "appendices/b-check-types.html#design-tips",
+    "title": "Appendix B — Check Types",
+    "section": "",
+    "text": "Keep objective IDs stable; saved progress is keyed by ID.\nUse passive checks for configuration and active checks for behaviour.\nProve the problem before the fix in security labs.\nUse filtered for a silent drop and refused for a reset or unreachable.\nOrder active checks by the story you want the grader’s packets to tell.\nTreat auto-grading as formative feedback, not a proctored exam.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Check Types</span>"
+    ]
+  },
+  {
+    "objectID": "acknowledgments.html",
+    "href": "acknowledgments.html",
+    "title": "Acknowledgments",
+    "section": "",
+    "text": "This book is a companion to NetSim, a browser-based network simulator and firewall teaching tool. NetSim is a modern successor to the iNetwork Simulator built at the University of Technology Sydney, described in Ye and Sandrasegaran’s 2006 IEEE paper on teaching firewall concepts.\nNetSim uses a curated subset of real Linux syntax and errors loudly on anything outside it. That design choice shapes this book: the commands are meant to travel to a real machine within the documented subset.",
+    "crumbs": [
+      "Appendices",
+      "Acknowledgments"
+    ]
+  },
+  {
+    "objectID": "about-author.html",
+    "href": "about-author.html",
+    "title": "About the Author",
+    "section": "",
+    "text": "Michael Borck is a software developer and educator working at the intersection of human expertise and artificial intelligence. He teaches networking, security, applied AI and systems analysis, and builds browser-based tools for learning.\nHis books include Follow the Packet, Break with Permission, Assume Breach, Build It, Teach It and The Great Silence.\nBuild the Network, Watch It Run is the field guide to NetSim: build the network, watch the packet, explain the verdict.\n\nConnect\n\nGitHub projects\nFree book collection",
+    "crumbs": [
+      "Appendices",
+      "About the Author"
+    ]
+  }
+]
