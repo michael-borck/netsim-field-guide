@@ -7,7 +7,7 @@ background: '#E3E9F2'
 title_lines:
 - Build the Network,
 - Watch It Run
-dark: false
+dark: true
 pixel: false
 scene: watch
 art_origin: Locally constructed editable vector illustration.
