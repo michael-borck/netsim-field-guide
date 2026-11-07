@@ -1,0 +1,133 @@
+# Write and Distribute a Lab {#sec-write-lab}
+
+> A lab is a JSON file. That is the whole distribution mechanism.
+
+## The Concept First
+
+A NetSim lab file has the same shape as a topology, plus a top-level `lab` object:
+
+```json
+{
+  "app": "netsim",
+  "version": 1,
+  "devices": [],
+  "links": [],
+  "lab": {
+    "id": "my-lab",
+    "title": "Lab 6 - My topic",
+    "blurb": "One line for the Labs menu.",
+    "steps": []
+  }
+}
+```
+
+A step has a title, a body, objectives and an optional quiz. A quiz answer is a zero-based index.
+
+The recommended authoring path:
+
+1. Build the starting topology in NetSim.
+2. Export the topology JSON.
+3. Add the `lab` block.
+4. Import it back and test as a student.
+5. Iterate until every objective goes green at the right time.
+6. Distribute the file or a share link.
+
+## Understanding Through a Lesson Plan
+
+A lesson plan has objectives, activities and a check. A lab file is the same, with a topology attached.
+
+## Discovering the Format with Your AI Partner
+
+### Exploration 1: Build the Skeleton
+
+Ask the AI to draft the JSON.
+
+```text
+Write a NetSim lab skeleton for a two-host addressing lab. Include the
+lab id, title, blurb, one step with a title, body, two objectives and
+one quiz question. Use JSON, not prose.
+```
+
+A skeleton is easier to review than a blank file.
+
+### Exploration 2: Test the Check
+
+Ask what could go wrong.
+
+```text
+A lab objective uses `iface-ip` with `inSubnet`. List the ways it could
+pass without the student understanding subnetting. Write a stronger
+second check.
+```
+
+A check is not a lesson.
+
+### Exploration 3: Plan Distribution
+
+Ask how to hand it out.
+
+```text
+Compare distributing a lab as a JSON file, a share link and a bundled
+lab in the repository. Include the trade-offs for updating, versioning
+and collecting attempts.
+```
+
+Each route has a maintenance cost.
+
+## From Concept to Practice
+
+A lab distribution record:
+
+| Field | Entry |
+|---|---|
+| Lab ID | l6-addressing |
+| Version | 1 |
+| Distribution | File or share link |
+| Objective IDs | Stable |
+| Quiz | One question |
+| Attempt export | Enabled |
+| Marking | Import and regrade |
+
+## Build Task
+
+Create a one-step lab with two objectives and one quiz question. Distribute it as a file and as a share link.
+
+## Classroom Connection
+
+A stable ID is a contract with saved progress. Renaming it resets the objective for every student.
+
+## Practice Exercises
+
+**Exercise 9.1 (Level 1).** Name the top-level lab keys.
+**Exercise 9.2 (Level 2).** Write one step.
+**Exercise 9.3 (Level 3).** Add two objectives.
+**Exercise 9.4 (Level 4).** Add a quiz question.
+**Exercise 9.5 (Level 5).** Distribute the lab and collect one attempt.
+
+## Chapter Summary
+
+- A lab is a topology plus a lab block.
+- Steps contain objectives and quizzes.
+- Build the topology visually, then add the JSON.
+- Test as a student before distributing.
+- Keep objective IDs stable.
+
+## Reflection
+
+Before moving on, ensure you:
+
+- [ ] Built the topology
+- [ ] Added the lab block
+- [ ] Tested the objectives
+- [ ] Added a quiz
+- [ ] Distributed the file
+
+## Your Learning Journal
+
+1. Which field was easiest to forget?
+2. What did the test reveal?
+3. Which distribution route fits your class?
+
+## Next Steps
+
+The lab is distributed. The final chapter exports the design to real systems.

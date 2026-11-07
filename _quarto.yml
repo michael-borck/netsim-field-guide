@@ -1,0 +1,74 @@
+project:
+  type: book
+  output-dir: _book
+  resources:
+    - LICENSE
+
+book:
+  title: "Build the Network, Watch It Run"
+  subtitle: "A NetSim Field Guide"
+  author: "Michael Borck"
+  date: "last-modified"
+  license: "CC BY 4.0 International"
+  description: "A practical guide to NetSim: build topologies, configure real Linux syntax, follow packets, test firewalls and services, and author auto-graded labs."
+  cover-image: cover.png
+  favicon: favicon.svg
+  site-url: https://michael-borck.github.io/netsim-field-guide
+  repo-url: https://github.com/michael-borck/netsim-field-guide
+
+  chapters:
+    - index.qmd
+    - copyright.qmd
+
+    - part: "Use the Simulator"
+      chapters:
+        - chapters/01-network-in-browser.qmd
+        - chapters/02-build-topology.qmd
+        - chapters/03-real-syntax.qmd
+        - chapters/04-follow-packet.qmd
+
+    - part: "Test and Harden"
+      chapters:
+        - chapters/05-firewalls.qmd
+        - chapters/06-services.qmd
+        - chapters/07-labs-and-grading.qmd
+
+    - part: "Author and Export"
+      chapters:
+        - chapters/08-design-a-lab.qmd
+        - chapters/09-write-and-distribute.qmd
+        - chapters/10-export-real.qmd
+
+  appendices:
+    - appendices/a-lab-map.qmd
+    - appendices/b-check-types.qmd
+    - acknowledgments.qmd
+    - about-author.qmd
+
+  page-navigation: true
+  sidebar:
+    style: docked
+    search: true
+    collapse-level: 2
+  other-links:
+    - text: NetSim
+      icon: globe2
+      href: https://netsim.borck.education/
+    - text: GitHub
+      icon: github
+      href: https://github.com/michael-borck/network-simulator
+    - text: All Books
+      icon: collection
+      href: https://books.borck.education
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: book-design.css
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    number-depth: 2
+    highlight-style: github

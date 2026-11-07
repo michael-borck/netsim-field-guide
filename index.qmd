@@ -1,0 +1,27 @@
+# Build the Network, Watch It Run {.unnumbered}
+
+> A network is easier to understand when you can watch a packet move, stop, and explain why.
+
+## Who this is for
+
+This book is for people learning networking who want to build a topology, configure it with real Linux commands and see what happens. It is also for educators who want to author labs that grade themselves.
+
+It assumes you can use a browser and a terminal. It does not assume you have configured a firewall before.
+
+## What NetSim is
+
+NetSim is a network simulator that runs entirely in the browser. You drag hosts, switches, routers, firewalls and access points onto a canvas, cable them, open a terminal on any device, and use a curated subset of real `iproute2`, `nft`, `iptables`, DHCP, DNS and HTTP commands.
+
+There is no backend. Topologies autosave in the browser, export as JSON, and share as compressed URLs.
+
+## What it simulates
+
+L2 switching and VLANs, ARP, IPv4 routing with static and RIP routes, ICMP, a TCP handshake, UDP, DHCP, DNS A records, HTTP, stateful firewalling with NAT, and connection tracking. Every packet is an event you can watch.
+
+It does not simulate IPv6, OSPF/BGP, 802.1Q trunking, TLS, real application payloads or performance. It is a teaching and design tool, not a packet-accurate emulator.
+
+## How to read it
+
+Part 1 teaches the interface, the topology and the commands. Part 2 tests firewalls and services, and explains the bundled labs. Part 3 shows how to author, distribute and export a lab.
+
+Each chapter ends with an AI exploration, a build or lab task, a summary and a reflection.

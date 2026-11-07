@@ -1,0 +1,122 @@
+# Build a Topology {#sec-topology}
+
+> A topology is a set of devices, links and addresses that can be reasoned about.
+
+## The Concept First
+
+NetSim's device palette has six types:
+
+- **Host**: one interface.
+- **Server**: one interface, with service editors.
+- **Switch**: eight ports, L2 forwarding and VLANs.
+- **Router**: four interfaces, IPv4 forwarding.
+- **Firewall**: four interfaces and nftables base chains.
+- **Wi-Fi AP**: a bridge with wireless client links.
+
+Drag a device onto the canvas, or click to drop one. Cable two devices by dragging from a dot on one to a dot on the other.
+
+Addressing can be done in two places: the Inspector fields or a terminal. Both use the same engine, so the result is identical.
+
+The starting topology is a claim about the network. Leave unconfigured what the student must configure. Configure what the scenario provides.
+
+## Understanding Through a Model Railway
+
+A model railway is not a real railway. It is a track plan, a set of trains and a power supply that lets you test a timetable.
+
+The topology is the track plan. The addresses and routes are the timetable.
+
+## Discovering Topology with Your AI Partner
+
+### Exploration 1: Choose the Devices
+
+Ask the AI to translate a scenario into devices.
+
+```text
+Scenario: two subnets, each with two hosts, joined by a router, with a
+firewall between the subnets and an internet host.
+
+List the devices, interfaces and links. Mark which device needs a route
+and which needs a firewall rule.
+```
+
+A good answer separates the topology from the configuration.
+
+### Exploration 2: Plan the Addressing
+
+Ask for an address plan.
+
+```text
+Plan IPv4 addressing for two LANs, a transit link and an internet host.
+Use private ranges. For each device and interface, give the address,
+prefix and default gateway.
+```
+
+The plan is the contract before the commands.
+
+### Exploration 3: Find the Minimum Topology
+
+Ask what can be removed.
+
+```text
+Here is a topology: [paste it]
+Remove devices and links that do not change the question being tested.
+Explain what each removal changes.
+```
+
+A smaller topology is easier to debug and grade.
+
+## From Concept to Practice
+
+A topology record:
+
+| Device | Type | Interfaces | Addresses | Role |
+|---|---|---|---|---|
+| pc1 | Host | eth0 | 192.168.1.10/24 | LAN client |
+| sw1 | Switch | 8 ports | none | L2 segment |
+| r1 | Router | eth0, eth1 | .1 on each LAN | Gateway |
+| fw1 | Firewall | 4 ports | outside/inside | Policy |
+| web | Server | eth0 | 203.0.113.10/24 | Public service |
+
+## Build Task
+
+Build a two-host, one-switch network. Address both hosts, cable them and ping. Then add a router and a second subnet.
+
+## Classroom Connection
+
+A topology that fits on one screen is easier to discuss. Start small; add one device only when the question needs it.
+
+## Practice Exercises
+
+**Exercise 2.1 (Level 1).** Name the six device types.
+**Exercise 2.2 (Level 2).** Build a two-host network.
+**Exercise 2.3 (Level 3).** Plan addressing for two LANs.
+**Exercise 2.4 (Level 4).** Add a router and default routes.
+**Exercise 2.5 (Level 5).** Reduce a topology to the minimum that tests the question.
+
+## Chapter Summary
+
+- A topology is devices, links and addresses.
+- The palette covers hosts, servers, switches, routers, firewalls and APs.
+- Address in the Inspector or the terminal; the engine is the same.
+- Leave the learning to the student.
+- Start small.
+
+## Reflection
+
+Before moving on, ensure you:
+
+- [ ] Built a two-host network
+- [ ] Cabled the devices
+- [ ] Addressed the interfaces
+- [ ] Added a router
+- [ ] Drew the topology record
+
+## Your Learning Journal
+
+1. Which device was easiest to miswire?
+2. Where did the addressing plan help?
+3. What would you remove next time?
+
+## Next Steps
+
+The topology is built. The next chapter configures it with real syntax.

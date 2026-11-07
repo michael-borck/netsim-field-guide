@@ -1,0 +1,121 @@
+# Design a Lab That Checks the Right Thing {#sec-design-lab}
+
+> An objective is a claim about the network, written so the simulator can test it.
+
+## The Concept First
+
+A NetSim objective has an `id`, a student-facing `label` and a `check`. The check is passive or active.
+
+Common check types:
+
+- `iface-ip`: an interface has an address or an address in a subnet.
+- `default-route`: a default route exists, optionally via a gateway.
+- `forwarding`: IP forwarding matches the expected value.
+- `fw-policy`: a chain policy matches.
+- `ping`: an ICMP echo succeeds or fails.
+- `tcp`: a TCP connect is open, refused or filtered.
+- `dns`: a name resolves or returns NXDOMAIN.
+- `http`: a GET succeeds, optionally with a required string.
+
+The design question is not "what did I teach?" It is "what evidence would prove the student did it?"
+
+## Understanding Through a Building Inspection
+
+An inspector does not ask whether the builder read the code. The inspector checks the exit, the alarm and the record.
+
+A lab objective is the check. The step is the instruction.
+
+## Discovering Objectives with Your AI Partner
+
+### Exploration 1: Turn a Step into a Check
+
+Ask the AI to choose a check.
+
+```text
+Step: "Give pc1 the address 192.168.1.10/24 on eth0."
+Write the objective and the check. Then write a second objective that
+proves the host can reach its gateway.
+```
+
+One check for configuration, one for behaviour.
+
+### Exploration 2: Prove the Problem
+
+Ask for a vulnerability-first objective.
+
+```text
+A lab asks students to harden a network. Write an objective that passes
+while the vulnerability exists, then the objective that passes after the
+fix. Explain the order.
+```
+
+The first objective establishes the baseline.
+
+### Exploration 3: Find the Weak Check
+
+Ask what a check misses.
+
+```text
+A lab checks that tcp/22 is filtered from the internet. What does that
+not prove? Write a second check that closes the gap.
+```
+
+A check is evidence for one claim, not all claims.
+
+## From Concept to Practice
+
+An objective record:
+
+| Field | Entry |
+|---|---|
+| ID | l6-ip |
+| Label | pc1 has an address in 192.168.1.0/24 |
+| Check | `iface-ip` |
+| Device | pc1 |
+| Interface | eth0 |
+| Subnet | 192.168.1.0/24 |
+| Type | Passive |
+
+## Build Task
+
+Write three objectives for one step: one configuration, one behaviour and one failure. Test them in the app.
+
+## Classroom Connection
+
+Objectives make the assessment transparent. The student knows what evidence is required, and the grader can show why it passed or failed.
+
+## Practice Exercises
+
+**Exercise 8.1 (Level 1).** Name three check types.
+**Exercise 8.2 (Level 2).** Write an `iface-ip` objective.
+**Exercise 8.3 (Level 3).** Write a `ping` objective.
+**Exercise 8.4 (Level 4).** Write a vulnerability-first objective.
+**Exercise 8.5 (Level 5).** Find a check that can pass while the student has not learned the concept, and fix it.
+
+## Chapter Summary
+
+- An objective is a testable claim.
+- Passive checks read state; active checks send packets.
+- Use a configuration check and a behaviour check.
+- Prove the problem before the fix.
+- A check is evidence for one claim.
+
+## Reflection
+
+Before moving on, ensure you:
+
+- [ ] Wrote one objective
+- [ ] Chose the right check
+- [ ] Tested it
+- [ ] Wrote a failure check
+- [ ] Found a weak check
+
+## Your Learning Journal
+
+1. Which check was strongest?
+2. What did a passive check miss?
+3. Where could a student game the check?
+
+## Next Steps
+
+The objectives are designed. The next chapter writes and distributes the lab.

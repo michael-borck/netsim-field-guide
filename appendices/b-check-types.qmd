@@ -1,0 +1,21 @@
+# Check Types {#sec-check-types}
+
+| Type | Fields | Passes when |
+|---|---|---|
+| `iface-ip` | `device`, `iface`, `cidr` or `inSubnet` | Interface has the exact address or an address in the subnet |
+| `default-route` | `device`, optional `via` | A default route exists, optionally via that gateway |
+| `forwarding` | `device`, `expect` | `net.ipv4.ip_forward` matches |
+| `fw-policy` | `device`, `hook`, `policy` | The chain policy matches |
+| `ping` | `from`, `toDevice` or `toAddr`, `expect` | ICMP echo succeeds or fails |
+| `tcp` | `from`, `toDevice` or `toAddr`, `port`, `expect` | Connect is open, refused or filtered |
+| `dns` | `from`, `name`, `expect`, optional `addr` | Name resolves or returns NXDOMAIN |
+| `http` | `from`, `url`, `expect`, optional `contains` | GET succeeds or fails, optionally with required text |
+
+## Design tips
+
+- Keep objective IDs stable; saved progress is keyed by ID.
+- Use passive checks for configuration and active checks for behaviour.
+- Prove the problem before the fix in security labs.
+- Use `filtered` for a silent drop and `refused` for a reset or unreachable.
+- Order active checks by the story you want the grader's packets to tell.
+- Treat auto-grading as formative feedback, not a proctored exam.

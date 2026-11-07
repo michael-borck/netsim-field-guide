@@ -1,0 +1,119 @@
+# Export to the Real World {#sec-export}
+
+> A simulation is useful when the design can leave it.
+
+## The Concept First
+
+NetSim exports more than a picture:
+
+- **Device config bundle (.zip)**: per-device `setup.sh`, `nftables.conf` and `dnsmasq.conf`.
+- **Containerlab topology**: a `.clab.yml` with Linux nodes and firewall rules.
+- **Docker Compose**: an approximate L2 topology.
+- **SVG/PNG diagrams**: documentation-grade topology images.
+- **Printable HTML report**: diagram, inventory, cabling, routing tables, DHCP/DNS and firewall rulesets.
+
+The generated configs are validated in CI against the real `nft` and `dnsmasq` binaries. That is the bridge from the simulator to a real machine.
+
+The export is not a promise that the real network will behave identically. It is a starting point that preserves the design.
+
+## Understanding Through a Building Plan
+
+A building plan is not the building. It is the document a builder can follow.
+
+The export is the plan. The real network is the building.
+
+## Discovering Exports with Your AI Partner
+
+### Exploration 1: Choose the Export
+
+Ask which export fits the task.
+
+```text
+A team wants to hand a firewall design to an engineer, run it in a lab,
+and include it in a report. Which NetSim exports fit each task? Explain
+the limits.
+```
+
+Different artefacts for different readers.
+
+### Exploration 2: Review the Config
+
+Ask what to check before running it.
+
+```text
+Here is a generated nftables.conf:
+[paste it]
+
+List the checks before applying it to a real host: interfaces, addresses,
+default policy, rule order, NAT and rollback.
+```
+
+A generated config is a draft until reviewed.
+
+### Exploration 3: Compare Simulation and Reality
+
+Ask what changes.
+
+```text
+The simulated network works. The real containerlab deployment does not.
+List the differences that could explain it: interface names, kernel
+settings, L2 behaviour, image versions and timing.
+```
+
+The export removes typing, not thinking.
+
+## From Concept to Practice
+
+An export record:
+
+| Artefact | Reader | Check |
+|---|---|---|
+| `setup.sh` | Engineer | Interfaces and routes |
+| `nftables.conf` | Firewall owner | Policy and order |
+| `dnsmasq.conf` | Service owner | Records and upstreams |
+| `.clab.yml` | Lab owner | Images and links |
+| Diagram/report | Stakeholder | Accuracy and scope |
+
+## Build Task
+
+Export one topology as a config bundle and a diagram. Review the firewall config before running anything.
+
+## Classroom Connection
+
+The export is the assessment bridge. A student can show the design, the config and the report, not only a canvas.
+
+## Practice Exercises
+
+**Exercise 10.1 (Level 1).** Name three export types.
+**Exercise 10.2 (Level 2).** Export a topology JSON.
+**Exercise 10.3 (Level 3).** Export a config bundle.
+**Exercise 10.4 (Level 4).** Review a generated nftables config.
+**Exercise 10.5 (Level 5).** Deploy a containerlab export and compare it with the simulation.
+
+## Chapter Summary
+
+- NetSim exports configs, containerlab, Compose, diagrams and reports.
+- The config bundle is the bridge to a real machine.
+- Generated configs need review.
+- The export preserves the design, not the behaviour guarantee.
+- Remove typing, not thinking.
+
+## Reflection
+
+Before moving on, ensure you:
+
+- [ ] Chose an export
+- [ ] Exported a topology
+- [ ] Reviewed a config
+- [ ] Exported a diagram
+- [ ] Named one simulation limit
+
+## Your Learning Journal
+
+1. Which export was most useful?
+2. What did the config review catch?
+3. Where would reality differ?
+
+## Next Steps
+
+The design is exported. The appendices collect the lab map and the check types.

@@ -1,0 +1,125 @@
+# Configure with Real Syntax {#sec-syntax}
+
+> NetSim accepts a curated subset of real Linux syntax and errors loudly on everything else.
+
+## The Concept First
+
+The terminal supports a subset of `iproute2`, `nft`, `iptables`, DHCP, DNS, HTTP and socket commands.
+
+Common commands:
+
+```bash
+ip addr add 192.168.1.10/24 dev eth0
+ip link set eth0 up
+ip route add default via 192.168.1.1
+ip neigh
+ping 192.168.1.20
+traceroute 203.0.113.10
+sysctl net.ipv4.ip_forward=1
+```
+
+A firewall is a router with nftables base chains declared. Rules can be written in `nft` or `iptables`; both compile to one internal model and list in both dialects.
+
+The important design choice: unsupported syntax produces an explicit `netsim: "..." is not supported` error. The tool never silently fakes a command.
+
+That is good for learning. It also means you must read the error and check `help`.
+
+## Understanding Through a Language Tutor
+
+A language tutor who accepts every mistake teaches a private language. A tutor who corrects you teaches the language other people speak.
+
+NetSim corrects you.
+
+## Discovering Commands with Your AI Partner
+
+### Exploration 1: Translate the Intent
+
+Ask the AI to turn an intent into a command.
+
+```text
+Intent: give pc1 the address 10.0.1.10/24 on eth0 and make 10.0.1.1 the
+default gateway.
+
+Write the iproute2 commands. Explain what each command changes and how
+you would verify it.
+```
+
+A good answer includes the verification.
+
+### Exploration 2: Read the Error
+
+Ask what an unsupported command means.
+
+```text
+NetSim returns: netsim: "ip route show table all" is not supported.
+Explain what the student should do next. Do not suggest guessing.
+```
+
+The next step is `help`, not a workaround.
+
+### Exploration 3: Compare Inspector and Terminal
+
+Ask whether the two paths are equivalent.
+
+```text
+Adding an address in the Inspector and with ip addr add both use the same
+engine. Explain why that matters for teaching and for the exported
+configuration.
+```
+
+The interface is not a separate model.
+
+## From Concept to Practice
+
+A configuration record:
+
+| Device | Command | Purpose | Verification |
+|---|---|---|---|
+| pc1 | `ip addr add ...` | Address | `ip addr show` |
+| pc1 | `ip route add default ...` | Gateway | `ip route` |
+| r1 | `sysctl net.ipv4.ip_forward=1` | Forwarding | `sysctl` |
+| fw1 | `nft add rule ...` | Policy | `nft list ruleset` |
+
+## Build Task
+
+Configure one host and one router from the terminal. Verify every change with a show command. Then break one command on purpose and read the error.
+
+## Classroom Connection
+
+The loud error is a teaching feature. Students learn the real subset and the habit of checking.
+
+## Practice Exercises
+
+**Exercise 3.1 (Level 1).** Add an address and verify it.
+**Exercise 3.2 (Level 2).** Add a default route.
+**Exercise 3.3 (Level 3).** Turn on forwarding.
+**Exercise 3.4 (Level 4).** Write one nft rule and one iptables rule.
+**Exercise 3.5 (Level 5).** Explain why unsupported syntax should fail.
+
+## Chapter Summary
+
+- NetSim uses a curated subset of real syntax.
+- Unsupported commands fail loudly.
+- The Inspector and terminal use the same engine.
+- Verify every change.
+- `help` is the first troubleshooting step.
+
+## Reflection
+
+Before moving on, ensure you:
+
+- [ ] Added an address
+- [ ] Added a route
+- [ ] Enabled forwarding
+- [ ] Read one error
+- [ ] Verified with a show command
+
+## Your Learning Journal
+
+1. Which command was easiest to mistype?
+2. What did the error teach you?
+3. Why is a loud error better than a silent fake?
+
+## Next Steps
+
+The devices are configured. The next chapter follows a packet.

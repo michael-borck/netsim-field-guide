@@ -1,0 +1,13 @@
+version: 1
+style: editorial-c
+art: cover-art.png
+family: NETWORKING / SIMULATION
+accent: '#3B5F8A'
+background: '#E3E9F2'
+title_lines:
+- Build the Network,
+- Watch It Run
+dark: false
+pixel: false
+scene: watch
+art_origin: Locally constructed editable vector illustration.

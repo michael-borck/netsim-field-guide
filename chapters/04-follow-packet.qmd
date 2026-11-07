@@ -1,0 +1,120 @@
+# Follow a Packet {#sec-packet}
+
+> A packet is a sequence of decisions, and NetSim lets you stop at every one.
+
+## The Concept First
+
+A ping from `pc1` to `pc2` is not one event. It is a chain:
+
+1. The host checks whether the destination is local.
+2. If local, it needs the destination MAC. ARP resolves it.
+3. If remote, it sends to the default gateway and needs the gateway MAC.
+4. The switch learns the source MAC and forwards the frame.
+5. The router decrements TTL, checks the route and forwards.
+6. The destination replies, and the return path repeats.
+
+NetSim animates ARP in amber, ICMP in blue, TCP in green and UDP in purple. A red ring flashes where a firewall drops a packet.
+
+The first ping is often slower because ARP must resolve the MAC. The second is faster because the neighbour table is warm.
+
+## Understanding Through a Delivery Route
+
+A parcel moves through a pickup, a depot, a flight and a local van. Each stage has a decision and a record.
+
+A packet is the parcel. The tables are the depot records.
+
+## Discovering the Path with Your AI Partner
+
+### Exploration 1: Predict the Path
+
+Ask the AI to trace a packet before you run it.
+
+```text
+pc1 192.168.1.10/24, gateway 192.168.1.1
+r1 eth0 192.168.1.1/24, eth1 192.168.2.1/24
+pc2 192.168.2.20/24, gateway 192.168.2.1
+
+Predict the path of ping from pc1 to pc2. Include ARP, the switch, the
+router, TTL and the return path.
+```
+
+The prediction makes the animation meaningful.
+
+### Exploration 2: Find the Drop
+
+Ask how to explain a failed ping.
+
+```text
+A ping fails. The host has an address, the link is up, and the firewall
+log shows a drop. List the evidence you would collect in order and the
+rule you would check.
+```
+
+The firewall log names the verdict. The route table shows the path.
+
+### Exploration 3: Test the First-Ping Effect
+
+Ask why the first ping differs.
+
+```text
+The first ping takes longer than the second. Explain why, and what you
+would clear to reproduce the first-ping behaviour.
+```
+
+The ARP cache is the answer.
+
+## From Concept to Practice
+
+A packet record:
+
+| Step | Device | Decision | Evidence |
+|---|---|---|---|
+| 1 | pc1 | Remote destination | `ip route` |
+| 2 | pc1 | Need gateway MAC | ARP request |
+| 3 | sw1 | Learn and forward | MAC table |
+| 4 | r1 | TTL and route | `ip route` |
+| 5 | pc2 | Reply | `ip neigh` |
+
+## Build Task
+
+Run a ping with the simulation paused. Step through the packets. Record the ARP request, the ICMP echo, the reply and the tables that changed.
+
+## Classroom Connection
+
+The pause button is the lesson. Students can point at the packet and explain the decision before it moves.
+
+## Practice Exercises
+
+**Exercise 4.1 (Level 1).** Trace a local ping.
+**Exercise 4.2 (Level 2).** Trace a routed ping.
+**Exercise 4.3 (Level 3).** Explain the first-ping delay.
+**Exercise 4.4 (Level 4).** Find the rule behind a firewall drop.
+**Exercise 4.5 (Level 5).** Draw the forward and return paths.
+
+## Chapter Summary
+
+- A packet is a chain of decisions.
+- ARP resolves a MAC before a frame can be sent.
+- Switches learn and forward; routers route and decrement TTL.
+- The firewall log names the rule.
+- Pause and step to explain.
+
+## Reflection
+
+Before moving on, ensure you:
+
+- [ ] Predicted a path
+- [ ] Stepped through a ping
+- [ ] Found the ARP exchange
+- [ ] Read a table
+- [ ] Explained a drop
+
+## Your Learning Journal
+
+1. Which decision surprised you?
+2. What did the table show that the animation did not?
+3. Where would you pause next time?
+
+## Next Steps
+
+The packet is visible. The next chapter tests policy with firewalls.

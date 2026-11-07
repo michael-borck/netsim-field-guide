@@ -1,0 +1,120 @@
+# Labs and Auto-Grading {#sec-labs}
+
+> A lab is a starting topology, a sequence of steps and objectives the simulator can test.
+
+## The Concept First
+
+NetSim ships five guided labs:
+
+1. Static addressing and ARP
+2. Routing between networks
+3. Build a stateful firewall
+4. DHCP, DNS and the web
+5. Harden a vulnerable network
+
+Each lab has steps, objectives and quizzes. The **Check objectives** button runs the checks against the live simulation using real packets. Students see the grader's probes animate.
+
+The checks are passive or active. Passive checks read device state, such as an interface address or a firewall policy. Active checks send packets, such as a ping, a TCP connect, a DNS query or an HTTP fetch.
+
+A lab is not a quiz with a network attached. It is a scenario with evidence.
+
+## Understanding Through a Driving Test
+
+A driving test does not ask whether you read the manual. It watches you drive.
+
+A NetSim lab watches the packets.
+
+## Discovering the Labs with Your AI Partner
+
+### Exploration 1: Map Lab to Concept
+
+Ask the AI to match each lab to a concept.
+
+```text
+Here are the five NetSim labs:
+[paste them]
+
+For each, name the main concept and one check that proves it. Explain
+why a passive check is not enough on its own.
+```
+
+Active checks prove behaviour; passive checks prove configuration.
+
+### Exploration 2: Prove the Problem
+
+Ask why a security lab checks the vulnerability first.
+
+```text
+Lab 5 asks students to confirm the exposure before they harden it.
+Explain why this is better than starting with the fix. What does it
+teach about evidence?
+```
+
+The first objective establishes the current state.
+
+### Exploration 3: Choose the Verdict
+
+Ask about filtered versus refused.
+
+```text
+A firewall drops tcp/22 silently. Another rejects it. Which check should
+a hardening lab use, and what does the student learn from the difference?
+```
+
+A silent drop is usually the stronger security outcome.
+
+## From Concept to Practice
+
+A lab record:
+
+| Lab | Concept | Objective | Check |
+|---|---|---|---|
+| 1 | Addressing and ARP | Hosts can ping | `ping` |
+| 2 | Routing | Packet crosses router | `ping`, `traceroute` |
+| 3 | Stateful firewall | LAN out, internet in blocked | `tcp`, `fw-policy` |
+| 4 | Services | DHCP, DNS, HTTP work | `dns`, `http` |
+| 5 | Hardening | Public web reachable, rest filtered | `tcp` filtered |
+
+## Build Task
+
+Complete Lab 1 and export the attempt. Then import it and check the objectives again.
+
+## Classroom Connection
+
+Auto-grading gives immediate feedback. It is formative, not a proctored exam. The attempt file is editable, so use it for learning and evidence, not high-stakes assessment.
+
+## Practice Exercises
+
+**Exercise 7.1 (Level 1).** Name the five labs.
+**Exercise 7.2 (Level 2).** Complete Lab 1.
+**Exercise 7.3 (Level 3).** Explain one active check.
+**Exercise 7.4 (Level 4).** Compare filtered and refused.
+**Exercise 7.5 (Level 5).** Export, import and regrade an attempt.
+
+## Chapter Summary
+
+- A lab is a topology, steps and objectives.
+- Active checks send packets; passive checks read state.
+- The grader's probes animate.
+- Prove the problem before the fix.
+- Auto-grading is formative.
+
+## Reflection
+
+Before moving on, ensure you:
+
+- [ ] Completed one lab
+- [ ] Read an objective
+- [ ] Watched a probe
+- [ ] Exported an attempt
+- [ ] Regraded it
+
+## Your Learning Journal
+
+1. Which objective was clearest?
+2. What did the probe prove?
+3. Where is auto-grading weakest?
+
+## Next Steps
+
+The labs work. The next chapter designs one.

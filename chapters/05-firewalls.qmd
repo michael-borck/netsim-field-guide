@@ -1,0 +1,122 @@
+# Firewalls {#sec-firewalls}
+
+> A firewall is a sequence of rules, and NetSim can name the rule that decided.
+
+## The Concept First
+
+NetSim firewalls support `nft` and `iptables` front-ends over one internal rule model. A rule added in one dialect lists in both.
+
+The model covers:
+
+- `input`, `forward` and `output` chains
+- accept, drop and reject verdicts
+- chain policies
+- connection tracking (`ct state new,established,related`)
+- NAT: masquerade, SNAT and DNAT port forwarding
+
+A firewall is a router with base chains declared. It also has a per-device log that names the exact rule behind every verdict.
+
+`DROP` is silent. `REJECT` sends an ICMP unreachable or a TCP reset. The difference matters: a client sees a timeout for a drop and a refusal for a reject.
+
+## Understanding Through a Nightclub Door
+
+A door policy is an ordered list. The first matching rule decides. A broad accept at the top makes every later drop irrelevant.
+
+A firewall is the door. The log is the bouncer's note.
+
+## Discovering Firewalls with Your AI Partner
+
+### Exploration 1: Write the Policy First
+
+Ask the AI to state the policy in plain language.
+
+```text
+A LAN may reach the internet. The internet may reach the public web
+server on tcp/80 only. Everything else is dropped.
+
+Write the firewall policy in plain language, then the nftables rules.
+Do not write the rules first.
+```
+
+The policy is the intent. The rules are the implementation.
+
+### Exploration 2: Test DROP and REJECT
+
+Ask how the client sees each.
+
+```text
+Compare a silent drop and a reject for tcp/22 from the internet. What does
+the client see, what does the log show and which verdict is appropriate?
+```
+
+A drop is quiet; a reject is a message.
+
+### Exploration 3: Read the Verdict
+
+Ask how to explain a blocked packet.
+
+```text
+A packet was dropped. List the evidence you would collect: chain, rule,
+source, destination, protocol and state. Explain why the log is better
+than guessing.
+```
+
+The log is the explanation.
+
+## From Concept to Practice
+
+A firewall record:
+
+| Field | Entry |
+|---|---|
+| Device | fw1 |
+| Chain | forward |
+| Policy | drop |
+| Rule | allow LAN to WAN, allow tcp/80 in |
+| State | established,related |
+| Log | rule ID and verdict |
+| Test | allowed path and denied path |
+
+## Build Task
+
+Start with a default-deny policy. Allow the LAN out and tcp/80 in. Test both the allowed and denied paths. Read the log for the denial.
+
+## Classroom Connection
+
+Firewalls are where students learn that order and policy are design decisions. The log makes the decision visible.
+
+## Practice Exercises
+
+**Exercise 5.1 (Level 1).** Name the three chains.
+**Exercise 5.2 (Level 2).** Write a default-deny policy.
+**Exercise 5.3 (Level 3).** Add a stateful allow rule.
+**Exercise 5.4 (Level 4).** Compare DROP and REJECT.
+**Exercise 5.5 (Level 5).** Add DNAT to a DMZ web server and test it.
+
+## Chapter Summary
+
+- NetSim firewalls use nft and iptables over one model.
+- Chains, policies and verdicts decide the packet.
+- Stateful rules allow replies.
+- DROP and REJECT look different to the client.
+- The log names the rule.
+
+## Reflection
+
+Before moving on, ensure you:
+
+- [ ] Wrote the policy
+- [ ] Set default deny
+- [ ] Allowed one path
+- [ ] Denied another
+- [ ] Read the log
+
+## Your Learning Journal
+
+1. Which rule was easiest to misorder?
+2. What did the client see for a drop?
+3. When would you use REJECT?
+
+## Next Steps
+
+The firewall decides. The next chapter adds the services that depend on it.

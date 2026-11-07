@@ -1,0 +1,24 @@
+# Lab Map {#sec-lab-map}
+
+| Lab | Focus | Concepts | Typical checks |
+|---|---|---|---|
+| 1 | Static addressing and ARP | Subnets, addresses, ARP, first-ping delay | `iface-ip`, `ping` |
+| 2 | Routing between networks | Gateways, default routes, TTL, traceroute | `default-route`, `ping`, `traceroute` |
+| 3 | Build a stateful firewall | Chains, policies, conntrack, DROP vs REJECT | `fw-policy`, `tcp`, `ping` |
+| 4 | DHCP, DNS and the web | DORA, A records, HTTP over TCP | `dns`, `http`, `ping` |
+| 5 | Harden a vulnerable network | Exposure, least privilege, filtered vs refused | `tcp` success before, `filtered` after |
+
+## Example networks
+
+- **Segmented network**: LAN and DMZ behind a stateful firewall, masquerade outbound, tcp/80 DNAT to the DMZ web server.
+- **Flat open network**: one segment, exposed services, no rules. Use it to find every problem or as the starting point for a hardening exercise.
+
+## Suggested teaching route
+
+1. Lab 1: addressing and ARP.
+2. Lab 2: routing.
+3. Lab 4: services.
+4. Lab 3: firewall.
+5. Lab 5: hardening.
+
+The order can vary. The concepts build from local delivery to policy.

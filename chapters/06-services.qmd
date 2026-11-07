@@ -1,0 +1,110 @@
+# Services {#sec-services}
+
+> DHCP, DNS and HTTP are ordinary packets. That is why they can be firewalled.
+
+## The Concept First
+
+NetSim runs services as real packet exchanges:
+
+- **DHCP**: `dhclient` sends DISCOVER, receives OFFER, sends REQUEST and receives ACK. The client installs the address, default route and nameserver.
+- **DNS**: an A-record server answers `dig` over UDP/53. Hostname resolution is wired into `ping`, `traceroute`, `nc` and `curl`.
+- **HTTP**: a configurable web server answers `curl` over the simulated TCP handshake.
+- **TCP/UDP**: `nc` tests ports, `nc -l` listens, `ss` and `conntrack -L` show state.
+
+All service traffic animates on the wire. Block UDP/67 and DHCP dies. Block UDP/53 and DNS dies. Block TCP/80 and the web dies.
+
+## Understanding Through a Postal Service
+
+DHCP is the address assignment desk. DNS is the directory. HTTP is the parcel.
+
+Each has a protocol, a server and a failure mode.
+
+## Discovering Services with Your AI Partner
+
+### Exploration 1: Trace DHCP
+
+Ask the AI to label the four packets.
+
+```text
+dhclient runs on pc2 against a DHCP server. List the four packets, the
+direction, the transport and what the client installs after the ACK.
+```
+
+A good answer names DISCOVER, OFFER, REQUEST and ACK.
+
+### Exploration 2: Break DNS
+
+Ask what happens when UDP/53 is blocked.
+
+```text
+A firewall drops udp/53 between pc2 and the DNS server. Explain what
+happens to dig, ping by name and curl by name. What still works by IP?
+```
+
+The failure is specific, not "the network is down".
+
+### Exploration 3: Test the Web
+
+Ask how to read a curl failure.
+
+```text
+curl http://web.lan/ fails. List the checks in order: DNS, route, TCP
+connect, firewall and server. Explain what each result would tell you.
+```
+
+A structured diagnosis beats guessing.
+
+## From Concept to Practice
+
+A service record:
+
+| Service | Client | Server | Port | Evidence |
+|---|---|---|---|---|
+| DHCP | pc2 | dhcp | UDP/67 | `ip addr`, lease |
+| DNS | pc2 | dns | UDP/53 | `dig` |
+| HTTP | pc2 | web | TCP/80 | `curl -v` |
+| Test | pc2 | target | TCP | `nc` |
+
+## Build Task
+
+Run `dhclient`, then `dig`, then `curl`. Capture the packets and the state each step installs.
+
+## Classroom Connection
+
+Services teach dependency. A web request depends on DNS, routing and TCP. The failure points are the lesson.
+
+## Practice Exercises
+
+**Exercise 6.1 (Level 1).** Name the four DHCP packets.
+**Exercise 6.2 (Level 2).** Resolve a name with `dig`.
+**Exercise 6.3 (Level 3).** Fetch a page with `curl`.
+**Exercise 6.4 (Level 4).** Block DNS and explain the failures.
+**Exercise 6.5 (Level 5).** Diagnose a curl failure in order.
+
+## Chapter Summary
+
+- Services are packet exchanges.
+- DHCP assigns address, route and nameserver.
+- DNS resolves names over UDP/53.
+- HTTP runs over TCP.
+- Service traffic can be firewalled.
+
+## Reflection
+
+Before moving on, ensure you:
+
+- [ ] Traced DHCP
+- [ ] Ran `dig`
+- [ ] Ran `curl`
+- [ ] Blocked one service
+- [ ] Diagnosed one failure
+
+## Your Learning Journal
+
+1. Which service was easiest to break?
+2. What did the client install?
+3. Where did the failure appear first?
+
+## Next Steps
+
+The services work. The next chapter uses the bundled labs and auto-grader.

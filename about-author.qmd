@@ -1,0 +1,14 @@
+# About the Author {.unnumbered}
+
+**Michael Borck** is a software developer and educator working at the intersection of human expertise and artificial intelligence. He teaches networking, security, applied AI and systems analysis, and builds browser-based tools for learning.
+
+His books include *Follow the Packet*, *Break with Permission*, *Assume Breach*, *Build It, Teach It* and *The Great Silence*.
+
+*Build the Network, Watch It Run* is the field guide to NetSim: build the network, watch the packet, explain the verdict.
+
+---
+
+**Connect**
+
+- [GitHub projects](https://github.com/michael-borck)
+- [Free book collection](https://books.borck.education)

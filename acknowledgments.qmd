@@ -1,0 +1,5 @@
+# Acknowledgments {.unnumbered}
+
+This book is a companion to **NetSim**, a browser-based network simulator and firewall teaching tool. NetSim is a modern successor to the iNetwork Simulator built at the University of Technology Sydney, described in Ye and Sandrasegaran's 2006 IEEE paper on teaching firewall concepts.
+
+NetSim uses a curated subset of real Linux syntax and errors loudly on anything outside it. That design choice shapes this book: the commands are meant to travel to a real machine within the documented subset.
